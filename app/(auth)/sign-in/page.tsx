@@ -1,27 +1,43 @@
 "use client"
 
 import { Button } from '@/components/ui/button'
+import { AuthContext } from '@/context/AuthContext';
+import { api } from '@/convex/_generated/api';
 import { GetAuthUserData } from '@/services/GlobalApi';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { useMutation } from 'convex/react';
 import Image from 'next/image'
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useContext } from 'react'
 
 function SignIn() {
+  
+  const router = useRouter();
 
+  const CreateUser = useMutation(api.users.CreateUser);
+  const {user , setUser} = useContext(AuthContext);
 
-const googleLogin = useGoogleLogin({
-  onSuccess: async (tokenResponse) => {
-    console.log(tokenResponse);
-    if(typeof window !== undefined){
-      localStorage.setItem('user_token' , tokenResponse.access_token);
-    }
-    
-    const user = GetAuthUserData(tokenResponse.access_token);
-    console.log(user);
-  },
-  onError: errorResponse => console.log(errorResponse),
-});
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      // console.log(tokenResponse);
+      if(typeof window !== undefined){
+        localStorage.setItem('user_token' , tokenResponse.access_token);
+      }
+      
+      const user = await GetAuthUserData(tokenResponse.access_token);
+      // console.log("user info from google sign-in" , user);
+      const result = await CreateUser({
+        name : user?.name,
+        email : user?.email,
+        picture : user?.picture,
+      });
+      // console.log("result of user created" , result);
+      setUser(result);
+      router.replace('/ai-assistants');
+    },
+    onError: errorResponse => console.log(errorResponse),
+  });
 
   return (
     <div className = 'flex flex-col items-center justify-center h-screen gap-10'>
