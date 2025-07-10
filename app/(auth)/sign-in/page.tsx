@@ -32,7 +32,7 @@ function SignIn() {
         email : user?.email,
         picture : user?.picture,
       });
-      // console.log("result of user created" , result);
+      console.log("result of user created" , result);
       setUser(result);
       router.replace('/ai-assistants');
     },

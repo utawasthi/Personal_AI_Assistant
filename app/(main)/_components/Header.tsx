@@ -7,7 +7,7 @@ function Header() {
 
   const {user} = useContext(AuthContext);
 
-  console.log('user from header component' , user);
+  if(user) console.log('user from header component' , user);
 
   return (
     <div className = 'flex justify-between p-3 px-6 items-center shadow-sm'>
