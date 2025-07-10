@@ -6,11 +6,13 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { AuthContext } from '@/context/AuthContext'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
+import { GetAllUserAssistants } from '@/convex/userAiAssistants'
 import AiAssistantsList from '@/services/AiAssistantsList'
-import { useMutation } from 'convex/react'
+import { useConvex, useMutation } from 'convex/react'
 import { Loader } from 'lucide-react'
 import Image from 'next/image'
-import React, { useContext, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useContext, useEffect, useState } from 'react'
 
 export type AssistantType = {
   id: number;
@@ -25,12 +27,32 @@ export type AssistantType = {
 function AiAssistants() {
 
   const [selectedAssistant , setSelectedAssistant] = useState<AssistantType[]>([]);
-
   const [loading , setLoading] = useState<boolean>(false);
+
+  const convex = useConvex();
+  const {user} = useContext(AuthContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    user &&  GetUserAssistants();
+  } , [user]);
+
+  const GetUserAssistants = async () => {
+    const result = await convex.query(api.userAiAssistants.GetAllUserAssistants , {
+      uid : user?._id as Id<"users">,
+    });
+    
+    console.log(result);
+    if(result.length){
+      //  navigte to new screen 
+      router.replace('/workplace');
+      return ;
+    }
+  }
 
   const insertAssistant = useMutation(api.userAiAssistants.InsertSelectedAssistants);
 
-  const {user} = useContext(AuthContext);
+  
 
   const handleOnSelect = (assistant : AssistantType) => {
       const item  = selectedAssistant.find((item : AssistantType) => item.id === assistant.id); 
