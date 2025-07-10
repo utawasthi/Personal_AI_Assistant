@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useContext, useEffect } from 'react'
-import Header from './_components/Header';
 import { GetAuthUserData } from '@/services/GlobalApi';
 import { useRouter } from 'next/navigation';
 import { useConvex } from 'convex/react';
