@@ -9,12 +9,14 @@ import { useConvex } from 'convex/react';
 import React, { useContext, useEffect, useState } from 'react'
 import { AssistantType } from '../../ai-assistants/page';
 import Image from 'next/image';
+import { AssistantContext } from '@/context/AssistantContext';
 
 function AssistantsList() {
 
   const [assistantList , setAssistantList] = useState<AssistantType[]>();
 
   const {user} = useContext(AuthContext);
+  const {assistant , setAssistant} = useContext(AssistantContext);
   const convex = useConvex();
 
    useEffect(() => {
@@ -46,21 +48,27 @@ function AssistantsList() {
 
       <div className = 'flex flex-col gap-5 p-1 my-3'>
         {
-          assistantList?.map((assistant) => (
-            <div key={assistant.id} className='p-2 flex items-center gap-4 hover:bg-gray-200 hover:dark:bg-slate-950 rounded-xl cursor-pointer'>
+          assistantList?.map((assist) => (
+            <div 
+              key={assist.id} 
+              className={`p-2 flex items-center gap-4 hover:bg-gray-200 hover:dark:bg-slate-950 rounded-xl cursor-pointer
+                ${assistant?.id === assist.id && 'bg-gray-200' }
+              `}
+              onClick = {() => setAssistant(assist)}
+            >
               <Image 
-                src={assistant.image}
-                alt={assistant.name}
+                src={assist.image}
+                alt={assist.name}
                 width={60}
                 height={60}
                 className='rounded-xl w-[60px] h-[60px] object-cover'
               />
               <div className='p-1 flex flex-col justify-center'>
                 <h2 className='font-medium text-md dark:text-white dark:font-semibold text-gray-700'>
-                  {assistant.name}
+                  {assist.name}
                 </h2>
                 <h2 className='text-[13px] text-gray-500 dark:text-gray-300'>
-                  {assistant.title}
+                  {assist.title}
                 </h2>
               </div>
             </div>
