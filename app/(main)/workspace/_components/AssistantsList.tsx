@@ -10,6 +10,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AssistantType } from '../../ai-assistants/page';
 import Image from 'next/image';
 import { AssistantContext } from '@/context/AssistantContext';
+import { div } from 'motion/react-client';
 
 function AssistantsList() {
 
@@ -33,7 +34,7 @@ function AssistantsList() {
 
   return (
     <div 
-      className = 'p-5 bg-secondary border-r-[0.5px] h-screen'
+      className = 'p-5 bg-secondary border-r-[0.5px] h-screen relative'
     >
       <h2 className = 'font-semibold text-md'>
         Your Personal AI Assistants
@@ -51,7 +52,7 @@ function AssistantsList() {
           assistantList?.map((assist) => (
             <div 
               key={assist.id} 
-              className={`p-2 flex items-center gap-4 hover:bg-gray-200 hover:dark:bg-slate-950 rounded-xl cursor-pointer
+              className={`p-2 flex items-center gap-2 hover:bg-gray-200 hover:dark:bg-slate-950 rounded-xl cursor-pointer
                 ${assistant?.id === assist.id && 'bg-gray-200' }
               `}
               onClick = {() => setAssistant(assist)}
@@ -74,6 +75,27 @@ function AssistantsList() {
             </div>
           ))
         }
+      </div>
+      <div className="absolute bottom-2 left-0 w-full px-3">
+        {user && (
+          <div className="flex items-center gap-3 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-sm">
+            <Image
+              src={user.picture}
+              alt="User"
+              width={35}
+              height={35}
+              className="rounded-full shrink-0"
+            />
+            <div className="flex flex-col overflow-hidden w-full">
+              <h2 className="text-sm font-medium text-gray-700 dark:text-white truncate">
+                {user.name}
+              </h2>
+              <h2 className="text-xs text-gray-500 dark:text-gray-300">
+                {user.orderId ? 'Pro Plan 🚀' : 'Free Plan 🐝'}
+              </h2>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
