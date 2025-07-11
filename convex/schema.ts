@@ -18,6 +18,7 @@ export default defineSchema({
     instruction : v.string(),
     userInstruction : v.string(),
     sampleQuestions : v.any(),
+    aiModelId : v.optional(v.string()),
     uid : v.id('users'),
   })
 })
