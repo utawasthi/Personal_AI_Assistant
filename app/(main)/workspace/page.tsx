@@ -1,6 +1,7 @@
 import React from 'react'
 import AssistantsList from './_components/AssistantsList'
 import Settings from './_components/AssistantSettings'
+import ChatUI from './_components/ChatUI'
 
 function Workspace() {
   return (
@@ -10,7 +11,7 @@ function Workspace() {
          <AssistantsList/>
         </div>
         <div className = 'md:col-span-4'>
-           Chat UI
+           <ChatUI/>
         </div>
         <div className = 'hidden lg:block md:col-span-2'>
             <Settings/>
