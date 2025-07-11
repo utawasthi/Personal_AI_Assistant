@@ -55,4 +55,13 @@ export const UpdateUserAiAssistant = mutation({
 
     return result;
   }
-})
+});
+
+export const DeleteAssistant = mutation({
+  args : {
+    id : v.id('userAiAssistants')
+  },
+  handler : async (ctx , args) => {
+    await ctx.db.delete(args.id);
+  }
+});

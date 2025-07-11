@@ -11,6 +11,7 @@ import { AssistantType } from '../../ai-assistants/page';
 import Image from 'next/image';
 import { AssistantContext } from '@/context/AssistantContext';
 import { div } from 'motion/react-client';
+import { BlurFade } from '@/components/magicui/blur-fade';
 
 function AssistantsList() {
 
@@ -22,7 +23,7 @@ function AssistantsList() {
 
    useEffect(() => {
       user &&  GetUserAssistants();
-    } , [user]);
+    } , [user , assistant == null]);
   
     const GetUserAssistants = async () => {
       const result = await convex.query(api.userAiAssistants.GetAllUserAssistants , {
@@ -49,30 +50,32 @@ function AssistantsList() {
 
       <div className = 'flex flex-col gap-5 p-1 my-3'>
         {
-          assistantList?.map((assist) => (
-            <div 
-              key={assist.id} 
-              className={`p-2 flex items-center gap-2 hover:bg-gray-200 hover:dark:bg-slate-950 rounded-xl cursor-pointer
-                ${assistant?.id === assist.id && 'bg-gray-200' }
-              `}
-              onClick = {() => setAssistant(assist)}
-            >
-              <Image 
-                src={assist.image}
-                alt={assist.name}
-                width={60}
-                height={60}
-                className='rounded-xl w-[60px] h-[60px] object-cover'
-              />
-              <div className='p-1 flex flex-col justify-center'>
-                <h2 className='font-medium text-md dark:text-white dark:font-semibold text-gray-700'>
-                  {assist.name}
-                </h2>
-                <h2 className='text-[13px] text-gray-500 dark:text-gray-300'>
-                  {assist.title}
-                </h2>
+          assistantList?.map((assist , index) => (
+            <BlurFade key = {assist?.image} delay = {0.15 + index * 0.05} inView>
+              <div 
+                key={assist.id} 
+                className={`p-2 flex items-center gap-2 hover:bg-gray-200 hover:dark:bg-slate-950 rounded-xl cursor-pointer
+                  ${assistant?.id === assist.id && 'bg-gray-200' }
+                `}
+                onClick = {() => setAssistant(assist)}
+              >
+                <Image 
+                  src={assist.image}
+                  alt={assist.name}
+                  width={60}
+                  height={60}
+                  className='rounded-xl w-[60px] h-[60px] object-cover'
+                />
+                <div className='p-1 flex flex-col justify-center'>
+                  <h2 className='font-medium text-md dark:text-white dark:font-semibold text-gray-700'>
+                    {assist.name}
+                  </h2>
+                  <h2 className='text-[13px] text-gray-500 dark:text-gray-300'>
+                    {assist.title}
+                  </h2>
+                </div>
               </div>
-            </div>
+            </BlurFade>
           ))
         }
       </div>
