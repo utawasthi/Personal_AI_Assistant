@@ -63,18 +63,6 @@ It's designed to simulate a human-like, intelligent conversation — perfect for
 
 ---
 
-## 💡 For Recruiters
-
-This project highlights:
-
-- ✨ **Clean UI/UX** and thoughtful component design  
-- 🔐 **Security-conscious development** (API code not committed)  
-- 📚 **API fallback logic** (OpenRouter → Groq)  
-- 🧠 **Smart, stateful LLM interaction** with context retention  
-- 🧪 **Environment-aware mocking** for development/testing
-
----
-
 ## ⚙️ Setup Instructions
 
 ```bash
