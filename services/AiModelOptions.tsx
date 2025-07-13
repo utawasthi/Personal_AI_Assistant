@@ -8,7 +8,7 @@ export const aiModelOptions = [
   {
     id : 2,
     name : 'Meta: Llama 4 Maverick',
-    model : 'meta-llama/llama-4-maverick:free',
+    model : 'meta-llama/llama-3.3-70b-instruct:free',
     logo : '/meta.png'
   },
   {
