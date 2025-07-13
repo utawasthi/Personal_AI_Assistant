@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { AssistantContext } from '@/context/AssistantContext';
 import { div } from 'motion/react-client';
 import { BlurFade } from '@/components/magicui/blur-fade';
+import AddNewAssistant from './AddNewAssistant';
 
 function AssistantsList() {
 
@@ -40,9 +41,11 @@ function AssistantsList() {
       <h2 className = 'font-semibold text-md'>
         Your Personal AI Assistants
       </h2>
-      <Button className = 'w-full mt-3 text-sm font-medium cursor-pointer'>
-        + Add New Assistant
-      </Button>
+      <AddNewAssistant>
+        <Button className = 'w-full mt-3 text-sm font-medium cursor-pointer'>
+          + Add New Assistant
+        </Button>
+      </AddNewAssistant>
       <Input
         className = 'bg-white mt-4'
         placeholder = 'Search'
