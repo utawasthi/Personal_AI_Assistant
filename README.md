@@ -63,22 +63,6 @@ It's designed to simulate a human-like, intelligent conversation — perfect for
 
 ---
 
-## ⚙️ Setup Instructions
-
-```bash
-# 1. Clone the repo
-git clone https://github.com/your-username/personal-ai-assistant.git
-cd personal-ai-assistant
-
-# 2. Install dependencies
-npm install
-
-# 3. Create environment variables
-touch .env.local
-
-# 4. Run the dev server
-npm run dev
-
 🧑‍💻 Author
 Utkarsh Awasthi
 🚀 Full Stack Developer | AI Enthusiast
