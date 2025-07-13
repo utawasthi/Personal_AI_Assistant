@@ -54,7 +54,7 @@ function AssistantsList() {
       <div className = 'flex flex-col gap-5 p-1 my-3'>
         {
           assistantList?.map((assist , index) => (
-            <BlurFade key = {assist?.image} delay = {index * 0.05} inView>
+            <BlurFade key = {index} delay = {index * 0.05} inView>
               <div 
                 key={assist.id} 
                 className={`p-2 flex items-center gap-2 hover:bg-gray-200 hover:dark:bg-slate-950 rounded-xl cursor-pointer
