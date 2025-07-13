@@ -32,15 +32,23 @@ function AssistantSettings() {
   }
 
   const handleOnSave = async () => {
-    setLoading(true);
-    const result = await updateAssistant({
-      id : assistant?._id,
-      aiModelId : assistant?.aiModelId,
-      userInstruction : assistant?.userInstruction,
-    });
-    console.log('result from ai assistant settings' , result);
-    toast('Changes Saved. Yey!! 🥳')
-    setLoading(false);
+
+    try{
+      setLoading(true);
+      const result = await updateAssistant({
+        id : assistant?._id,
+        aiModelId : assistant?.aiModelId,
+        userInstruction : assistant?.userInstruction,
+      });
+      console.log('result from ai assistant settings' , result);
+      toast('Changes Saved. Yey!! 🥳')
+    }
+    catch(err){
+      console.log(err);
+    }
+    finally{
+       setLoading(false);
+    }
   }
 
   const handleOnDelete = async () => {
