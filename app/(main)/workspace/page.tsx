@@ -10,12 +10,12 @@ function Workspace() {
         <div className = 'hidden md:block col-span-2'>
          <AssistantsList/>
         </div>
-        <div className = 'md:col-span-4'>
+        <div className = 'col-span-8 md:col-span-6 xl:col-span-4'>
            <ChatUI/>
         </div>
-        <div className = 'hidden lg:block md:col-span-2'>
+        <div className = 'hidden xl:block md:col-span-2'>
             <Settings/>
-        </div>
+        </div> 
       </div>
     </div>
   )
