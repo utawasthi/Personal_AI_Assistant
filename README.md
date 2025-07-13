@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 Personal AI Assistant — Next.js + LLM Chatbot
 
-## Getting Started
+> Smart. Conversational. Context-Aware.  
+> Your own AI assistant, built for real-world use — and ready for production.
 
-First, run the development server:
+![demo screenshot](./public/demo-screenshot.png)
+
+---
+
+## 📌 What is this?
+
+A full-featured **AI-powered assistant chat app**, built using **Next.js 14**, with multi-model support (OpenRouter + Groq), context tracking, typing feedback, and a slick UI.  
+It's designed to simulate a human-like, intelligent conversation — perfect for learning, productivity, or just chatting.
+
+---
+
+## 🚀 Features
+
+✅ Seamless Chat UI with markdown support  
+✅ Typing loader with *sarcastic AI responses* while waiting  
+✅ Context-aware conversations  
+✅ Dual model support:
+  - 🧠 [OpenRouter](https://openrouter.ai) (Meta LLaMA 4/3/Scout/etc.)
+  - ⚡ [Groq](https://groq.com) fallback when OpenRouter hits limits  
+✅ Fallback logic on rate-limiting (`429` errors)  
+✅ Custom Assistant Avatar with name/image  
+✅ Dev-mode mocking to avoid API usage  
+✅ Fully mobile-responsive  
+✅ Secure & production-ready
+
+---
+
+## 🧠 AI Models
+
+| Provider      | Model Examples               | Role            |
+|---------------|------------------------------|-----------------|
+| **OpenRouter** | `llama-4-maverick`, `scout`, etc. | Primary         |
+| **Groq**       | `llama3-70b-8192`, `qwen-qwq-32b`  | Fallback Engine |
+
+> The assistant will automatically switch to Groq if OpenRouter's free request limit is exceeded.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Next.js 14** (App Router, Server Actions)
+- **React 18**
+- **Tailwind CSS**
+- **Lucide Icons**
+- **OpenAI-compatible APIs** (OpenRouter + Groq)
+- **TypeScript**
+- **Axios** for API handling
+- **Context API** for assistant management
+- **Markdown rendering** via `react-markdown`
+
+---
+
+## 📸 Screenshots
+
+| Chat Interface 💬 | Assistant Dialog 📎 |
+|------------------|---------------------|
+| ![chat](./public/chat-preview.png) | ![dialog](./public/dialog-preview.png) |
+
+---
+
+## 💡 For Recruiters
+
+This project highlights:
+
+- ✨ **Clean UI/UX** and thoughtful component design  
+- 🔐 **Security-conscious development** (API code not committed)  
+- 📚 **API fallback logic** (OpenRouter → Groq)  
+- 🧠 **Smart, stateful LLM interaction** with context retention  
+- 🧪 **Environment-aware mocking** for development/testing
+
+---
+
+## ⚙️ Setup Instructions
 
 ```bash
+# 1. Clone the repo
+git clone https://github.com/your-username/personal-ai-assistant.git
+cd personal-ai-assistant
+
+# 2. Install dependencies
+npm install
+
+# 3. Create environment variables
+touch .env.local
+
+# 4. Run the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🧑‍💻 Author
+Utkarsh Awasthi
+🚀 Full Stack Developer | AI Enthusiast
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📝 License
+MIT — free for personal & educational use.
+Just don’t forget to give credit 😉.
