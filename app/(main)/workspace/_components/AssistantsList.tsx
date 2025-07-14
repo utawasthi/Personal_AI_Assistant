@@ -42,7 +42,6 @@ function AssistantsList() {
       const result = await convex.query(api.userAiAssistants.GetAllUserAssistants , {
         uid : user?._id as Id<"users">,
       });
-      console.log("from assistant list component" , result);
       setAssistantList(result);
     }
 

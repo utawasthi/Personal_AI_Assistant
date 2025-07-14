@@ -40,7 +40,7 @@ function AssistantSettings() {
         aiModelId : assistant?.aiModelId,
         userInstruction : assistant?.userInstruction,
       });
-      console.log('result from ai assistant settings' , result);
+      // console.log('result from ai assistant settings' , result);
       toast('Changes Saved. Yey!! 🥳')
     }
     catch(err){

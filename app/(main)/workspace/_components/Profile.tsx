@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,7 +13,7 @@ import { Progress } from "@/components/ui/progress";
 import { AuthContext } from "@/context/AuthContext";
 import { DialogClose } from "@radix-ui/react-dialog";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface ProfileProps {
   openDialog: boolean;
@@ -22,10 +24,19 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
 
   const {user} = useContext(AuthContext);
 
+  const [maxToken , setMaxToken] = useState<number>(0);
+
+  useEffect(() => {
+    if(user?.orderId) {
+      setMaxToken(10000);
+    }
+    else setMaxToken(5000);
+  } , []);
+
 
   if(openDialog) console.log("user clicked");
   return (
-    <Dialog open = {openDialog}>
+    <Dialog open = {openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger></DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -47,9 +58,11 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
                </div>
               <div className = 'flex flex-col gap-2 m-2'>
                   <hr className = 'my-3'/>
-                  <h2 className = 'text-gray-600 text-md font-semibold'>Token Usage</h2>
-                  <h2 className = 'font-light'>0 / 0</h2>
-                  <Progress value = {33}/>
+                  <h2 className = 'text-gray-600 text-md font-semibold'>Tokens Left</h2>
+                  <h2 className = 'font-light'>
+                    {Number(user?.credits)} / {maxToken}
+                  </h2>
+                  <Progress value={(Number(user?.credits) / maxToken) * 100} />
                   <h2 className = 'flex justify-start items-center gap-4 text-md p-1 mt-1 font-semibold'>
                     Current Plan
                     <span className = 'ml-2 p-1 bg-gray-300/60 rounded-md'>{!user?.orderId ? "🐝 Free Plan" : "💎 Premium"}</span>
@@ -69,15 +82,6 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
                 <Button className = 'w-full cursor-pointer'>
                   Get Started
                 </Button>
-              </div>
-              <div className = 'mt-3'>
-                  <Button 
-                    variant = {'secondary'}
-                    onClick = {() => setOpenDialog(false)}
-                    className = 'cursor-pointer'
-                  >
-                    Close
-                  </Button>
               </div>
             </div>
           </DialogDescription>

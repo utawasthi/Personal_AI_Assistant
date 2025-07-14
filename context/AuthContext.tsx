@@ -7,6 +7,7 @@ export interface UserType {
   picture: string;
   _id? : string; // optional if set later by backend
   orderId? : string;
+  credits? : number;
 }
 
 interface AuthContextType {

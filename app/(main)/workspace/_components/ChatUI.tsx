@@ -11,6 +11,11 @@ import { AssistantContext } from "@/context/AssistantContext";
 import axios from "axios";
 import Image from "next/image";
 import { loadingMessages } from "@/services/LoadingMessages";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { AuthContext, UserType } from "@/context/AuthContext";
+import { Id } from "@/convex/_generated/dataModel";
+import { AssistantType } from "../../ai-assistants/page";
 
 interface MessageType {
   role: "user" | "assistant" | "system";
@@ -24,6 +29,8 @@ function ChatUI() {
 
   const chatRef = useRef<any>(null);
 
+  const {user , setUser} = useContext(AuthContext);
+
   const { assistant } = useContext(AssistantContext);
 
   useEffect(() => {
@@ -35,6 +42,9 @@ function ChatUI() {
   useEffect(() => {
     setMessages([]);
   } , [assistant?.id]);
+
+
+  const updateToken = useMutation(api.users.UpdateTokens);
 
   const getRandomLoadingMessage = (): string => {
     return loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
@@ -68,6 +78,7 @@ function ChatUI() {
         ...prev.slice(0, -1),
         { role: "assistant", content: res.data.reply.content },
       ]);
+      updateUserToken(res.data.reply.content);
     } 
     catch (err: any) {
       const msg = err?.response?.data?.error;
@@ -84,6 +95,24 @@ function ChatUI() {
       setLoading(false);
     }
   };
+
+  const updateUserToken = async (response : string) => {
+    const tokenCount = response.trim() ? response.trim().split(/\s+/).length : 0;
+
+    console.log(tokenCount);
+    // update user token --> 
+    const result = await updateToken({
+      credits : Number(user?.credits) - tokenCount,
+      uid : user?._id as Id<"users">
+    });
+
+    if(user){
+      setUser({
+        ...user , 
+        credits : Number(user?.credits) - tokenCount,
+      })
+    }
+  }
 
   return (
     <div className="p-6">

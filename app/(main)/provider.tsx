@@ -41,7 +41,7 @@ function Provider({
       const result = await convex.query(api.users.GetUser , {
         email : user?.email
       });
-      console.log(result);
+      // console.log(result);
       setUser(result);
     }
     catch(err){

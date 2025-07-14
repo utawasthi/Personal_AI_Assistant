@@ -23,6 +23,7 @@ export type AssistantType = {
   userInstruction: string;
   sampleQuestions: string[];
   aiModelId? : string;
+  credits? : number;
 }
 
 function AiAssistants() {
