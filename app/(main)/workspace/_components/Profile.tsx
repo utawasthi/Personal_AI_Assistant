@@ -1,0 +1,90 @@
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Progress } from "@/components/ui/progress";
+import { AuthContext } from "@/context/AuthContext";
+import { DialogClose } from "@radix-ui/react-dialog";
+import Image from "next/image";
+import { Dispatch, SetStateAction, useContext } from "react";
+
+interface ProfileProps {
+  openDialog: boolean;
+  setOpenDialog: Dispatch<SetStateAction<boolean>>;
+}
+
+function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
+
+  const {user} = useContext(AuthContext);
+
+
+  if(openDialog) console.log("user clicked");
+  return (
+    <Dialog open = {openDialog}>
+      <DialogTrigger></DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle></DialogTitle>
+          <DialogDescription asChild>
+            <div>
+              <div className = 'flex gap-4 items-center m-2'>
+                <Image 
+                  src = {user?.picture!}
+                  alt = 'user'
+                  width = {150}
+                  height = {150}
+                  className = 'w-[60px] h-[60px] rounded-full'
+                />
+                <div>
+                  <h2 className = 'text-gray-700/90 font-semibold text-lg'>{user?.name}</h2>
+                  <h2 className = 'text-gray-500'>{user?.email}</h2>
+                </div>
+               </div>
+              <div className = 'flex flex-col gap-2 m-2'>
+                  <hr className = 'my-3'/>
+                  <h2 className = 'text-gray-600 text-md font-semibold'>Token Usage</h2>
+                  <h2 className = 'font-light'>0 / 0</h2>
+                  <Progress value = {33}/>
+                  <h2 className = 'flex justify-start items-center gap-4 text-md p-1 mt-1 font-semibold'>
+                    Current Plan
+                    <span className = 'ml-2 p-1 bg-gray-300/60 rounded-md'>{!user?.orderId ? "🐝 Free Plan" : "💎 Premium"}</span>
+                  </h2>
+              </div>
+              <div className = 'p-4 mt-3 border rounded-xl'>
+                <div className = 'flex justify-between'>
+                  <div>
+                    <h2 className = 'text-gray-700 font-bold text-lg'> Premium Plan </h2>
+                    <h2 className = 'text-gray-500 font-semibold text-base'> 500,000 Tokens</h2>
+                  </div>
+                  <div className = 'text-slate-800 font-bold text-lg'>
+                    $10 / month
+                  </div>
+                </div>
+                <hr className = 'my-3' />
+                <Button className = 'w-full cursor-pointer'>
+                  Get Started
+                </Button>
+              </div>
+              <div className = 'mt-3'>
+                  <Button 
+                    variant = {'secondary'}
+                    onClick = {() => setOpenDialog(false)}
+                    className = 'cursor-pointer'
+                  >
+                    Close
+                  </Button>
+              </div>
+            </div>
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+export default Profile
