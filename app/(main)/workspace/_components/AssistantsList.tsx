@@ -13,6 +13,15 @@ import { AssistantContext } from '@/context/AssistantContext';
 import { div } from 'motion/react-client';
 import { BlurFade } from '@/components/magicui/blur-fade';
 import AddNewAssistant from './AddNewAssistant';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { LogOut, UserCircle2 } from 'lucide-react';
 
 function AssistantsList() {
 
@@ -84,23 +93,33 @@ function AssistantsList() {
       </div>
       <div className="absolute bottom-2 left-0 w-full px-3">
         {user && (
-          <div className="flex items-center gap-3 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-sm">
-            <Image
-              src={user.picture}
-              alt="User"
-              width={35}
-              height={35}
-              className="rounded-full shrink-0"
-            />
-            <div className="flex flex-col overflow-hidden w-full">
-              <h2 className="text-sm font-medium text-gray-700 dark:text-white truncate">
-                {user.name}
-              </h2>
-              <h2 className="text-xs text-gray-500 dark:text-gray-300">
-                {user.orderId ? 'Pro Plan 🚀' : 'Free Plan 🐝'}
-              </h2>
+          <DropdownMenu>
+          <DropdownMenuTrigger>
+            <div className="flex items-center gap-3 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-sm cursor-pointer">
+              <Image
+                src={user.picture}
+                alt="User"
+                width={35}
+                height={35}
+                className="rounded-full shrink-0"
+              />
+              <div className="flex flex-col overflow-hidden w-full">
+                <h2 className="text-sm font-medium text-gray-700 dark:text-white truncate">
+                  {user.name}
+                </h2>
+                <h2 className="text-xs text-gray-500 dark:text-gray-300">
+                  {user.orderId ? 'Pro Plan 🚀' : 'Free Plan 🐝'}
+                </h2>
+              </div>
             </div>
-          </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem><UserCircle2 />Profile</DropdownMenuItem>
+              <DropdownMenuItem><LogOut />Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
       </div>
     </div>
