@@ -32,7 +32,6 @@ declare global {
   }
 }
 
-
 function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
 
   const {user} = useContext(AuthContext);
@@ -141,7 +140,7 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
       setLoading(false);
      }
   }
-  
+
   return (
     <Dialog open = {openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger></DialogTrigger>
