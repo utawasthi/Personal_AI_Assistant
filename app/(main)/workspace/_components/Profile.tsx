@@ -11,18 +11,15 @@ import {
 } from "@/components/ui/dialog"
 import { Progress } from "@/components/ui/progress";
 import { AuthContext } from "@/context/AuthContext";
-import { DialogClose } from "@radix-ui/react-dialog";
 import axios from "axios";
 import { Loader2Icon } from "lucide-react";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
-import Razorpay from "razorpay";
-import { mutation } from "@/convex/_generated/server";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { toast } from "sonner";
-import { div } from "motion/react-client";
+import { useRouter } from "next/navigation";
 
 interface ProfileProps {
   openDialog: boolean;
@@ -41,7 +38,10 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
   const {user} = useContext(AuthContext);
   const [maxToken , setMaxToken] = useState<number>(0);
   const [loading , setLoading] = useState<boolean>(false);
+
   const updateUserOrder = useMutation(api.users.UpdateTokens);
+
+  const router = useRouter();
 
   useEffect(() => {
     if(user?.orderId) {
@@ -90,14 +90,14 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
         // console.log(res.razorpay.subscription_id);
 
         if(res?.razorpay_subscription_id){
-           await updateUserOrder({
-            uid : user?._id as Id<"users">,
-            orderId : res.razorpay_subscription_id!,
-            credits : Number(user?.credits) + 500000,
-           });
-           toast('Thank you for subscribing! Unleash the power of AI');
+          await updateUserOrder({
+          uid : user?._id as Id<"users">,
+          orderId : res.razorpay_subscription_id!,
+          credits : Number(user?.credits) + 500000,
+          });
+          toast('Thank you for subscribing! Unleash the power of AI');
+          router.refresh();
         }
-
       },
       'prefill' : {
         name : user?.name,
@@ -115,7 +115,33 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
     razorpay.open();
   }
 
-  if(openDialog) console.log("user clicked");
+  const cancelSubscription = async (subscriptionId : string) => {
+     console.log("cancel subscription requested");
+     try{
+      setLoading(true);
+      const result = await axios.post('/api/cancel-subscription' , {
+          subscriptionId : user?.orderId,
+          cancelAtCycleEnd : false,
+      });
+      console.log(result);
+      if(result?.data?.status){
+        await updateUserOrder({
+          uid : user?._id as Id<"users">,
+          credits : Math.max(0 , Number(user?.credits) - 500000),
+          orderId : "",
+        });
+        toast('Your Plan is Cancelled ! Back to Free Tier');
+        router.refresh();
+      } 
+     }
+     catch(error){
+      console.log(error);
+     }
+     finally{
+      setLoading(false);
+     }
+  }
+  
   return (
     <Dialog open = {openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger></DialogTrigger>
@@ -176,6 +202,7 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
                   <Button 
                    className = 'w-full p-3 cursor-pointer'
                    variant = 'secondary'
+                   onClick = {() => cancelSubscription(user?.orderId!)}
                   >
                     Cancel Subscription
                   </Button>

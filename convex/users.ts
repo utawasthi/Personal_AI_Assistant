@@ -39,22 +39,21 @@ export const GetUser = query({
 });
 
 export const UpdateTokens = mutation({
-  args : {
-      credits : v.number(),
-      uid : v.id('users'),
-      orderId : v.optional(v.string()),
+  args: {
+    credits: v.number(),
+    uid: v.id("users"),
+    orderId: v.optional(v.string()),
   },
-  handler : async (ctx , args) => {
-    if(!args.orderId){
-      const result = await ctx.db.patch(args.uid , {
-        credits : args.credits,
-      });
+  handler: async (ctx, args) => {
+    const updateData: any = {
+      credits: args.credits,
+    };
+
+    if ('orderId' in args) {
+      // Unset the field if orderId is undefined or empty string
+      updateData.orderId = args.orderId === "" ? undefined : args.orderId;
     }
-    else{
-      const result = await ctx.db.patch(args.uid , {
-        credits : args.credits,
-        orderId : args.orderId,
-      });
-    }
-  }
+
+    await ctx.db.patch(args.uid, updateData);
+  },
 });
