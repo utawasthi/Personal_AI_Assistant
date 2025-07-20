@@ -12,6 +12,8 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { AuthContext } from "@/context/AuthContext";
 import { DialogClose } from "@radix-ui/react-dialog";
+import axios from "axios";
+import { Loader2Icon } from "lucide-react";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
@@ -23,8 +25,8 @@ interface ProfileProps {
 function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
 
   const {user} = useContext(AuthContext);
-
   const [maxToken , setMaxToken] = useState<number>(0);
+  const [loading , setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if(user?.orderId) {
@@ -33,6 +35,23 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
     else setMaxToken(5000);
   } , []);
 
+  const generateSubscriptionId = async () => {
+    try{
+      setLoading(true);
+      const result = await axios.post('/api/create-subscription');
+      console.log(result.data);
+    }
+    catch(error){
+      console.log(error);
+    }
+    finally{
+      setLoading(false);
+    }
+  }
+
+  const MakePayment = async () => {
+    
+  }
 
   if(openDialog) console.log("user clicked");
   return (
@@ -79,7 +98,11 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
                   </div>
                 </div>
                 <hr className = 'my-3' />
-                <Button className = 'w-full cursor-pointer'>
+                <Button className = 'w-full cursor-pointer'
+                  disabled = {loading}
+                  onClick = {generateSubscriptionId}
+                >
+                  {loading ? <Loader2Icon className = 'animate-spin' /> : null}
                   Get Started
                 </Button>
               </div>
