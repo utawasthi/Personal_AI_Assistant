@@ -10,7 +10,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AssistantType } from '../../ai-assistants/page';
 import Image from 'next/image';
 import { AssistantContext } from '@/context/AssistantContext';
-import { div } from 'motion/react-client';
+
 import { BlurFade } from '@/components/magicui/blur-fade';
 import AddNewAssistant from './AddNewAssistant';
 import {

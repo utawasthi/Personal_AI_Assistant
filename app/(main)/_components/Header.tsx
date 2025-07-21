@@ -2,27 +2,33 @@
 import { AuthContext } from '@/context/AuthContext'
 import Image from 'next/image'
 import React, { useContext } from 'react'
+import UserAccount from './UserAccount';
 
 function Header() {
 
   const {user} = useContext(AuthContext);
 
   return (
-    <div className = 'fixed flex justify-between p-3 px-6 items-center shadow-sm'>
-      <Image 
-        src = {'/logo.svg'}
-        alt = 'logo'
-        width = {50}
-        height = {50}
-      />
+    <div className = 'flex justify-between p-3 px-6 items-center shadow-sm'>
+      <div className = 'flex justify-start items-center gap-10'>
+        <Image 
+          src = {'/logo.svg'}
+          alt = 'logo'
+          width = {50}
+          height = {50}
+        />
+        <h2 className = 'text-3xl font-bold tracking-wide '>Orbit Mind</h2>
+      </div>
 
-      {user?.picture && <Image 
-        src = {user?.picture}
-        alt = 'user'
-        width = {40}
-        height = {40}
-        className = 'rounded-full'
-      />}
+      <UserAccount>
+        <Image
+          src = {user?.picture!}
+          alt="User"
+          width={80}
+          height={80}
+          className= "rounded-full h-[40px] w-[40px]"
+        />
+      </UserAccount>
     </div>
   )
 }
