@@ -6,7 +6,6 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { AuthContext } from '@/context/AuthContext'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
-import { GetAllUserAssistants } from '@/convex/userAiAssistants'
 import AiAssistantsList from '@/services/AiAssistantsList'
 import { useConvex, useMutation } from 'convex/react'
 import { Loader } from 'lucide-react'
@@ -54,8 +53,6 @@ function AiAssistants() {
 
   const insertAssistant = useMutation(api.userAiAssistants.InsertSelectedAssistants);
 
-  
-
   const handleOnSelect = (assistant : AssistantType) => {
       const item  = selectedAssistant.find((item : AssistantType) => item.id === assistant.id); 
       if(item){
@@ -72,37 +69,37 @@ function AiAssistants() {
   }
 
   const handleOnClickContinue = async () => {
-  setLoading(true);
 
-  const safeRecords = selectedAssistant.map((assistant) => ({
-    id: assistant.id,
-    name: assistant.name,
-    title: assistant.title,
-    image: assistant.image,
-    instruction: assistant.instruction,
-    userInstruction: assistant.userInstruction,
-    sampleQuestions: assistant.sampleQuestions,
-  }));
+    const safeRecords = selectedAssistant.map((assistant) => ({
+      id: assistant.id,
+      name: assistant.name,
+      title: assistant.title,
+      image: assistant.image,
+      instruction: assistant.instruction,
+      userInstruction: assistant.userInstruction,
+      sampleQuestions: assistant.sampleQuestions,
+    }));
 
-  if (!user?._id) {
-    console.error("User is missing or not loaded.");
-    setLoading(false);
-    return;
-  }
+    if (!user?._id) {
+      console.error("User is missing or not loaded.");
+      setLoading(false);
+      return;
+    }
 
-  try {
-    const result = await insertAssistant({
-      records: safeRecords,
-      uid: user._id as Id<"users">,
-    });
+    try {
+      setLoading(true);
+      const result = await insertAssistant({
+        records: safeRecords,
+        uid: user._id as Id<"users">,
+      });
 
-    console.log("from insert Assistant", result);
-  } catch (err) {
-    console.error("Failed to insert assistants", err);
-  } finally {
-    setLoading(false);
-  }
-};
+      console.log("from insert Assistant", result);
+    } catch (err) {
+      console.error("Failed to insert assistants", err);
+    } finally {
+      setLoading(false);
+    }
+ };
 
 
   return (
