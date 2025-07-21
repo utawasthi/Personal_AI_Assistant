@@ -23,15 +23,19 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { LogOut, UserCircle2 } from 'lucide-react';
 import Profile from './Profile';
+import { googleLogout } from '@react-oauth/google';
+import { useRouter } from 'next/navigation';
 
 function AssistantsList() {
 
   const [assistantList , setAssistantList] = useState<AssistantType[]>();
   const [openProfile , setOpenProfile] = useState<boolean>(false);
 
-  const {user} = useContext(AuthContext);
+  const {user , setUser} = useContext(AuthContext);
   const {assistant , setAssistant} = useContext(AssistantContext);
   const convex = useConvex();
+
+  const router = useRouter();
 
 
    useEffect(() => {
@@ -43,6 +47,13 @@ function AssistantsList() {
         uid : user?._id as Id<"users">,
       });
       setAssistantList(result);
+    }
+
+    const handleLogOut = () => {
+      googleLogout();
+      setUser(null);
+      localStorage.removeItem("user_token");
+      router.push('/');
     }
 
   return (
@@ -119,7 +130,7 @@ function AssistantsList() {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick = {() => setOpenProfile(true)}><UserCircle2 />Profile</DropdownMenuItem>
-              <DropdownMenuItem><LogOut />Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick = {handleLogOut}><LogOut />Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
