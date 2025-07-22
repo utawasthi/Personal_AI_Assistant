@@ -158,20 +158,33 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
                   className = 'w-[60px] h-[60px] rounded-full'
                 />
                 <div>
-                  <h2 className = 'text-gray-700/90 font-semibold text-lg'>{user?.name}</h2>
+                  <h2 className = 'text-gray-700/90 font-semibold text-lg dark:text-white/95'>
+                    {user?.name}
+                  </h2>
                   <h2 className = 'text-gray-500'>{user?.email}</h2>
                 </div>
                </div>
               <div className = 'flex flex-col gap-2 m-2'>
                   <hr className = 'my-3'/>
-                  <h2 className = 'text-gray-600 text-md font-semibold'>Tokens Left</h2>
+                  <h2 className = 'text-gray-600 text-md font-semibold dark:text-white/95'>
+                    Tokens Left
+                  </h2>
                   <h2 className = 'font-light'>
                     {Number(user?.credits)} / {maxToken}
                   </h2>
-                  <Progress value={(Number(user?.credits) / maxToken) * 100} />
-                  <h2 className = 'flex justify-start items-center gap-10 text-md p-1 mt-1 font-semibold'>
+                  <Progress
+                   value={(Number(user?.credits) / maxToken) * 100} 
+                   className="dark:[&>div]:bg-cyan-500"
+                  />
+                  <h2 className = 'flex justify-start items-center gap-10 text-md p-1 mt-1 font-semibold dark:text-white/95'>
                     Current Plan
-                    <span className = 'ml-2 p-1 bg-gray-300/60 rounded-md'>{!user?.orderId ? "🐝 Free Plan" : "💎 Premium"}</span>
+                    <span 
+                      className = 'ml-2 p-1 bg-gray-300/60 rounded-md dark:text-white/95 dark:bg-cyan-950'
+                    >
+                      {
+                        !user?.orderId ? "🐝 Free Plan" : "💎 Premium"
+                      }
+                    </span>
                   </h2>
               </div>
 
@@ -180,15 +193,15 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
                 <div className = 'p-4 mt-3 border rounded-xl'>
                   <div className = 'flex justify-between'>
                     <div>
-                      <h2 className = 'text-gray-700 font-bold text-lg'> Premium Plan </h2>
-                      <h2 className = 'text-gray-500 font-semibold text-base'> 500,000 Tokens</h2>
+                      <h2 className = 'text-gray-700 font-bold text-lg dark:text-white/90'> Premium Plan </h2>
+                      <h2 className = 'text-gray-500 font-semibold text-base dark:text-gray-400'> 500,000 Tokens</h2>
                     </div>
-                    <div className = 'text-slate-800 font-bold text-lg'>
+                    <div className = 'text-slate-800 font-bold text-lg dark:text-gray-400'>
                       $10 / month
                     </div>
                   </div>
                   <hr className = 'my-3' />
-                  <Button className = 'w-full cursor-pointer'
+                  <Button className = 'w-full cursor-pointer dark:bg-cyan-950 dark:text-white/95 dark:hover:bg-cyan-900'
                     disabled = {loading}
                     onClick = {generateSubscriptionId}
                   >
@@ -199,7 +212,7 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
                 : 
                 <div className = 'flex justify-start items-center mt-5'>
                   <Button 
-                   className = 'w-full p-3 cursor-pointer'
+                   className = 'w-full cursor-pointer dark:bg-cyan-950 dark:text-white/95 dark:hover:bg-cyan-900'
                    variant = 'secondary'
                    onClick = {() => cancelSubscription(user?.orderId!)}
                   >
