@@ -57,87 +57,91 @@ function AssistantsList() {
     }
 
   return (
-    <div 
-      className = 'p-5 bg-secondary border-r-[0.5px] h-screen relative'
-    >
-      <h2 className = 'font-semibold text-md'>
-        Your Personal AI Assistants
-      </h2>
-      <AddNewAssistant>
-        <Button className = 'w-full mt-3 text-sm font-medium cursor-pointer'>
-          + Add New Assistant
-        </Button>
-      </AddNewAssistant>
-      <Input
-        className = 'bg-white mt-4'
-        placeholder = 'Search'
-      />
+      <div className="flex flex-col h-screen bg-black border-r-[0.5px] p-5">
+        <h2 className="font-semibold text-md text-white">
+          Your Personal AI Assistants
+        </h2>
 
-      <div className = 'flex flex-col gap-5 p-1 my-3'>
-        {
-          assistantList?.map((assist , index) => (
-            <BlurFade key = {index} delay = {index * 0.05} inView>
-              <div 
-                key={assist.id} 
-                className={`p-2 flex items-center gap-2 hover:bg-gray-200 hover:dark:bg-slate-950 rounded-xl cursor-pointer
-                  ${assistant?.id === assist.id && 'bg-gray-200' }
+        <AddNewAssistant>
+          <Button className="w-full mt-3 text-sm font-medium cursor-pointer">
+            + Add New Assistant
+          </Button>
+        </AddNewAssistant>
+
+        <Input
+          className="bg-white mt-4"
+          placeholder="Search"
+        />
+
+        <div className="flex-1 overflow-y-auto scrollbar-hide mt-4 space-y-4 pr-1">
+          {assistantList?.map((assist, index) => (
+            <BlurFade key={index} delay={index * 0.05} inView>
+              <div
+                key={assist.id}
+                className={`p-2 flex items-center gap-2 hover:bg-gray-200 hover:dark:bg-slate-900 rounded-xl cursor-pointer
+                  ${assistant?.id === assist.id && 'bg-gray-200 dark:bg-slate-950'}
                 `}
-                onClick = {() => setAssistant(assist)}
+                onClick={() => setAssistant(assist)}
               >
-                <Image 
+                <Image
                   src={assist.image}
                   alt={assist.name}
                   width={60}
                   height={60}
-                  className='rounded-xl w-[60px] h-[60px] object-cover'
+                  className="rounded-xl w-[60px] h-[60px] object-cover"
                 />
-                <div className='p-1 flex flex-col justify-center'>
-                  <h2 className='font-medium text-md dark:text-white dark:font-semibold text-gray-700'>
+                <div className="p-1 flex flex-col justify-center">
+                  <h2 className="font-medium text-md text-gray-700 dark:text-white">
                     {assist.name}
                   </h2>
-                  <h2 className='text-[13px] text-gray-500 dark:text-gray-300'>
+                  <h2 className="text-[13px] text-gray-500 dark:text-gray-300">
                     {assist.title}
                   </h2>
                 </div>
               </div>
             </BlurFade>
-          ))
-        }
-      </div>
-      <div className="absolute bottom-2 left-0 w-full px-3">
-        {user && (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className="flex gap-10 items-center bg-white dark:bg-gray-800 p-2 rounded-lg shadow-sm cursor-pointer">
-                <Image
-                  src={user.picture}
-                  alt="User"
-                  width={35}
-                  height={35}
-                  className="rounded-full shrink-0"
-                />
-                <div className="flex flex-col overflow-hidden w-full">
-                  <h2 className="text-sm font-medium text-gray-700 dark:text-white truncate">
-                    {user.name}
-                  </h2>
-                  <h2 className="text-xs text-gray-500 dark:text-gray-300">
-                    {user.orderId ? 'Pro Plan 🚀' : 'Free Plan 🐝'}
-                  </h2>
+          ))}
+        </div>
+
+        <div className="pt-4 border-t border-white/10">
+          {user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex gap-3 items-center bg-white dark:bg-slate-950 p-2 rounded-lg shadow-sm cursor-pointer">
+                  <Image
+                    src={user.picture}
+                    alt="User"
+                    width={35}
+                    height={35}
+                    className="rounded-full shrink-0"
+                  />
+                  <div className="flex flex-col overflow-hidden w-full">
+                    <h2 className="text-sm font-medium text-gray-700 truncate dark:text-white/80">
+                      {user.name}
+                    </h2>
+                    <h2 className="text-xs text-gray-500 dark:text-gray-300">
+                      {user.orderId ? 'Pro Plan 🚀' : 'Free Plan 🐝'}
+                    </h2>
+                  </div>
                 </div>
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick = {() => setOpenProfile(true)}><UserCircle2 />Profile</DropdownMenuItem>
-              <DropdownMenuItem onClick = {handleLogOut}><LogOut />Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => setOpenProfile(true)}>
+                  <UserCircle2 />Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogOut}>
+                  <LogOut />Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        </div>
+
+        <Profile openDialog={openProfile} setOpenDialog={setOpenProfile} />
       </div>
-      <Profile openDialog = {openProfile} setOpenDialog = {setOpenProfile}/>
-    </div>
-  )
+    );
 }
 
 export default AssistantsList

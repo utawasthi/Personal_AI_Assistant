@@ -115,7 +115,7 @@ function ChatUI() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-secondary">
       {
         messages.length === 0 ? <EmptyChatState /> : 
         <div
