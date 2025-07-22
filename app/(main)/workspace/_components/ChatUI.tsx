@@ -141,7 +141,7 @@ function ChatUI() {
                   />
                 )}
                 <div
-                  className={`mt-1 p-3 whitespace-pre-wrap overflow-hidden break-words ${
+                  className={`mt-1 p-3 whitespace-pre-wrap break-words w-full overflow-hidden ${
                     msg.role === "user"
                       ? "bg-gray-50 text-black rounded-2xl dark:text-white dark:bg-[#4c4b4b]"
                       : "bg-gray-50 text-black rounded-lg dark:bg-secondary dark:text-white/90"
@@ -158,7 +158,7 @@ function ChatUI() {
                     </div>
                   ) : (
                     <div
-                      className = 'markdown-body wrap-break-word'
+                      className = 'markdown-body break-words'
                     >
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
@@ -174,7 +174,7 @@ function ChatUI() {
           ))}
         </div>
       }
-      <div className="flex justify-between p-5 gap-5 w-full bg-slate-100 rounded-3xl h-[100px] items-center mt-2 dark:bg-[#454549]">
+      <div className="flex justify-between p-5 gap-5 w-full bg-slate-100 rounded-3xl h-[100px] items-center mt-3 dark:bg-[#454549]">
         <Textarea
           className="border-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none !text-lg resize-none dark:bg-[#454549]"
           placeholder="Ask anything"
