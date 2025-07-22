@@ -62,7 +62,7 @@ function AssistantSettings() {
   }
 
   return assistant && (
-    <div className = 'p-5 bg-secondary border-l-[1px] h-screen'>
+    <div className = 'p-5 bg-secondary dark:bg-black/20 border-l-[1px] h-screen'>
       <h2 className = 'font-medium text-xl'>
         Settings
       </h2>
@@ -77,19 +77,20 @@ function AssistantSettings() {
           />
           <div>
             <h2> {assistant?.name} </h2>
-            <p> {assistant?.title} </p>
+            <p className = 'font-medium text-gray-400'> {assistant?.title} </p>
           </div>
           <div className = 'mt-4'>
-            <h2 className = 'my-2 text-gray-600'>
+            <h2 className = 'my-2 text-gray-600 dark:text-white/80'>
               Model : 
             </h2>
             <Select 
               defaultValue = {assistant.aiModelId}
               onValueChange = {(value) => handleOnInputChange('aiModelId' , value)} 
             >
-              <SelectTrigger className = "cursor-pointer w-full bg-white">
+              <SelectTrigger className = "cursor-pointer w-full bg-white dark:bg-black/25">
                 <SelectValue 
                   placeholder = 'Select Model'
+                  className = 'dark:text-white'
                 />
               </SelectTrigger>
               <SelectContent>
@@ -101,7 +102,7 @@ function AssistantSettings() {
                     >
                       <div
                         key = {model.name}
-                        className = 'flex items-center gap-2 cursor-pointer hover:bg-slate-100 my-2'
+                        className = 'flex items-center gap-2 cursor-pointer my-2 dark:text-white'
                       >
                         <Image 
                           src = {model.logo}
@@ -110,7 +111,7 @@ function AssistantSettings() {
                           width = {20}
                           className = 'rounded-full'
                         />
-                        <h2 className = 'font-light text-md text-gray-700'>
+                        <h2 className = 'font-light text-md text-gray-700 dark:text-white'>
                           {model.name}
                         </h2>
                       </div>
@@ -121,11 +122,11 @@ function AssistantSettings() {
             </Select>
           </div>
           <div className = 'mt-4'>
-            <h2 className = 'my-2 text-gray-600'>
+            <h2 className = 'my-2 text-gray-600 dark:text-white/90'>
               Instructions : 
             </h2>
             <Textarea 
-              className = 'h-[180px] bg-white'
+              className = 'h-[180px] bg-white dark:bg-black/25'
               placeholder = 'Add Instructions'
               value = {assistant?.userInstruction}
               onChange = {(e) => handleOnInputChange('userInstruction' , e.target.value)}
