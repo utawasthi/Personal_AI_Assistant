@@ -149,7 +149,7 @@ function AssistantSettings() {
             <Button 
               onClick = {handleOnSave}
               disabled = {loading}
-              className = 'cursor-pointer'
+              className = 'cursor-pointer dark:bg-cyan-950 dark:text-white/95'
             >
               {loading ? <Loader2Icon className = 'animate-spin'/> :  <Save/>}
               Save

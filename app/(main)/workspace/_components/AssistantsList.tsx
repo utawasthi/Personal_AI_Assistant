@@ -63,7 +63,7 @@ function AssistantsList() {
         </h2>
 
         <AddNewAssistant>
-          <Button className="w-full mt-3 text-sm font-medium cursor-pointer">
+          <Button className="w-full mt-3 text-sm font-medium cursor-pointer dark:bg-cyan-950 dark:text-white/95">
             + Add New Assistant
           </Button>
         </AddNewAssistant>
