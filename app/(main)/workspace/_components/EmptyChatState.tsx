@@ -19,10 +19,10 @@ function EmptyChatState() {
             <BlurFade key = {index} delay = {0.25 * index} inView>
               <div
               key = {index}
-              className = 'p-3 border rounded-3xl shadow-xs hover:bg-slate-100 cursor-pointer'
+              className = 'p-3 border rounded-3xl shadow-xs hover:bg-slate-100 cursor-pointer dark:hover:bg-[#454549]'
               >
                 <h2
-                  className = 'font-medium text-gray-700 flex justify-between items-center gap-7'
+                  className = 'font-medium text-gray-700 flex justify-between items-center gap-7 dark:text-white/60'
                 > 
                 {suggestion} 
                 <ChevronRight/>

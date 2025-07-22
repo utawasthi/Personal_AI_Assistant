@@ -1,5 +1,6 @@
 "use client";
 
+import 'highlight.js/styles/github-dark.css';
 import { Button } from "@/components/ui/button";
 import ReactMarkdown from "react-markdown";
 import EmptyChatState from "./EmptyChatState";
@@ -15,7 +16,8 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { AuthContext, UserType } from "@/context/AuthContext";
 import { Id } from "@/convex/_generated/dataModel";
-import { AssistantType } from "../../ai-assistants/page";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 interface MessageType {
   role: "user" | "assistant" | "system";
@@ -115,7 +117,7 @@ function ChatUI() {
   }
 
   return (
-    <div className="p-6 bg-secondary">
+    <div className="p-6">
       {
         messages.length === 0 ? <EmptyChatState /> : 
         <div
@@ -133,25 +135,38 @@ function ChatUI() {
                   <Image
                     src={assistant.image}
                     alt="assistant"
-                    width={40}
+                    width={40} 
                     height={40}
-                    className="object-cover rounded-full"
+                    className="rounded-full object-cover h-[30px] w-[30px]"
                   />
                 )}
                 <div
-                  className={`mt-1 p-3 whitespace-pre-wrap break-words ${
+                  className={`mt-1 p-3 whitespace-pre-wrap overflow-hidden break-words ${
                     msg.role === "user"
-                      ? "bg-gray-200 text-black rounded-2xl"
-                      : "bg-gray-50 text-black rounded-lg"
+                      ? "bg-gray-50 text-black rounded-2xl dark:text-white dark:bg-[#4c4b4b]"
+                      : "bg-gray-50 text-black rounded-lg dark:bg-secondary dark:text-white/90"
                   }`}
                 >
                   {loading && index === messages.length - 1 ? (
                     <div className="flex items-center gap-2">
                       <Loader2Icon className="animate-spin w-4 h-4 text-gray-500" />
-                      <span>{msg.content}</span>
+                      <span
+                       className = 'dark:bg-[#757576]'
+                      >
+                        {msg.content}
+                      </span>
                     </div>
                   ) : (
-                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                    <div
+                      className = 'markdown-body wrap-break-word'
+                    >
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[rehypeHighlight]}
+                        >
+                        {msg.content}
+                      </ReactMarkdown>
+                    </div>
                   )}
                 </div>
               </div>
@@ -159,10 +174,9 @@ function ChatUI() {
           ))}
         </div>
       }
-      {/* Input field */}
-      <div className="flex justify-between p-5 gap-5 w-full bg-slate-100 rounded-3xl h-[100px] items-center mt-2">
+      <div className="flex justify-between p-5 gap-5 w-full bg-slate-100 rounded-3xl h-[100px] items-center mt-2 dark:bg-[#454549]">
         <Textarea
-          className="border-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none !text-lg resize-none"
+          className="border-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none !text-lg resize-none dark:bg-[#454549]"
           placeholder="Ask anything"
           value={input}
           onChange={(e) => setInput(e.target.value)}
