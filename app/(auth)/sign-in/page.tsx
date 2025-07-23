@@ -48,7 +48,9 @@ function SignIn() {
         <div 
           className="col-span-10 lg:col-span-5 flex flex-col items-center min-h-screen p-8 bg-white dark:bg-black"
         >
-          <div className = 'flex items-center justify-center gap-4 mb-20'>
+          <div 
+           className = 'flex items-center justify-center gap-4 mb-20'
+          >
             <Image
               src="/logo.svg"
               alt="Orbit Mind Logo"
@@ -60,7 +62,7 @@ function SignIn() {
               Orbit Mind
             </h2>
           </div>
-          <div className = 'dark:text-white/90 mt-20 mb-10 font-mono'>
+          <div className = 'flex flex-col items-center justify-center dark:text-white/90 mt-20 mb-10 font-mono'>
               <p className = 'text-5xl'>
                 <span className = 'dark:text-cyan-300 font-medium'>O</span>rbit Mind remembers,so
                 you don't have to!
