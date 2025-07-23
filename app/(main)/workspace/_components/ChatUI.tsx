@@ -20,6 +20,7 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { ChatInputContext } from '@/context/ChatInputContext';
 import { MessageContext } from '@/context/MessageContext';
+import { toast } from 'sonner';
 
 interface MessageType {
   role: "user" | "assistant" | "system";
@@ -56,6 +57,11 @@ function ChatUI() {
 
   const handleOnSendMessage = async () => {
     if (!input.trim()) return;
+
+    if(user?.credits! <= 0){
+      toast('😔 Your Free Tokens Are Expired , Switch To Premium Mode!');
+      return;
+    }
     
     const userInput = input;
     setInput("");
