@@ -18,6 +18,8 @@ import { AuthContext, UserType } from "@/context/AuthContext";
 import { Id } from "@/convex/_generated/dataModel";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import { ChatInputContext } from '@/context/ChatInputContext';
+import { MessageContext } from '@/context/MessageContext';
 
 interface MessageType {
   role: "user" | "assistant" | "system";
@@ -25,8 +27,9 @@ interface MessageType {
 }
 
 function ChatUI() {
-  const [input, setInput] = useState<string>("");
-  const [messages, setMessages] = useState<MessageType[]>([]);
+  const {input , setInput} = useContext(ChatInputContext);
+  const {messages , setMessages} = useContext(MessageContext);
+  // const [messages, setMessages] = useState<MessageType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const chatRef = useRef<any>(null);
@@ -124,11 +127,11 @@ function ChatUI() {
   return (
     <div className="p-6">
       {
-        messages.length === 0 ? <EmptyChatState /> : 
+        messages?.length === 0 ? <EmptyChatState /> : 
         <div
           ref = {chatRef}
           className="h-[80vh] overflow-scroll scrollbar-hide space-y-4">
-          {messages.map((msg, index) => (
+          {messages?.map((msg, index) => (
             <div
               key={index}
               className={`flex ${
@@ -152,7 +155,7 @@ function ChatUI() {
                       : "bg-gray-50 text-black rounded-lg dark:bg-secondary dark:text-white/90"
                   }`}
                 >
-                  {loading && index === messages.length - 1 ? (
+                  {loading && index === messages?.length - 1 ? (
                     <div className="flex items-center gap-2">
                       <Loader2Icon className="animate-spin w-4 h-4 text-gray-500" />
                       <span
