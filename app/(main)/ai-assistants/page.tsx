@@ -43,10 +43,10 @@ function AiAssistants() {
       uid : user?._id as Id<"users">,
     });
     
-    console.log(result);
+    console.log("from getUserAssistants" ,result);
     if(result.length){
-      //  navigte to new screen 
-      router.replace('/workspace');
+      console.log("moving to the workspace");
+      router.push('/workspace');
       return ;
     }
   }
@@ -93,7 +93,9 @@ function AiAssistants() {
         uid: user._id as Id<"users">,
       });
 
-      console.log("from insert Assistant", result);
+      router.push('/workspace');
+
+      // console.log("from insert Assistant", result);
     } catch (err) {
       console.error("Failed to insert assistants", err);
     } finally {

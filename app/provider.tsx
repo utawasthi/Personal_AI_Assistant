@@ -10,21 +10,26 @@ import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
+
   const [user, setUser] = useState<UserType | null>(null);
+  const [loadingUser , setLoadingUser] = useState<boolean>(true);
+
 
   const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
   const router = useRouter();
 
   useEffect(() => {
-    if(!user) router.push('/sign-in');
-    else router.push('/ai-assistants');
-  } , [user]);
+    if(!user && !loadingUser) router.push('/sign-in');
+  } , [user , loadingUser]);
 
   useEffect(() => {
     const loadUser = async () => {
       const token = localStorage.getItem("user_token");
-      if (!token) return;
+      if (!token){
+        setLoadingUser(false);
+        return;
+      }
 
       try {
         // 1. Get user info from Google
@@ -57,6 +62,9 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
         console.error("Failed to restore user:", error);
         setUser(null);
         router.push('/sign-in');
+      }
+      finally{
+        setLoadingUser(false);
       }
     };
 
