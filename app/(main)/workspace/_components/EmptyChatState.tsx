@@ -2,10 +2,19 @@ import React, { useContext } from 'react'
 import { AssistantContext } from '@/context/AssistantContext'
 import { ChevronRight } from 'lucide-react';
 import { BlurFade } from '@/components/magicui/blur-fade';
+import { ChatInputContext } from '@/context/ChatInputContext';
+import { MessageContext } from '@/context/MessageContext';
 
 function EmptyChatState() {
 
-    const {assistant , setAssistant} = useContext(AssistantContext);
+  const {assistant , setAssistant} = useContext(AssistantContext);
+  const {input , setInput} = useContext(ChatInputContext);
+
+
+  const handleOnClick = (question : string) => {
+    setInput(question);
+    console.log("input question" , question);
+  }
 
   return (
     <div className = 'mt-12 flex flex-col items-center'>
@@ -20,6 +29,7 @@ function EmptyChatState() {
               <div
               key = {index}
               className = 'p-3 border rounded-3xl shadow-xs hover:bg-slate-100 cursor-pointer dark:hover:bg-[#454549]'
+              onClick = {() => handleOnClick(suggestion)}
               >
                 <h2
                   className = 'font-medium text-gray-700 flex justify-between items-center gap-7 dark:text-white/60'
