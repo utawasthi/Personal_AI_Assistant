@@ -12,7 +12,6 @@ import Image from 'next/image';
 import React, { useContext, useState } from 'react'
 import { toast } from 'sonner';
 import ConfirmationDialog from './ConfirmationDialog';
-import { DeleteAssistant } from '@/convex/userAiAssistants';
 import { BlurFade } from '@/components/magicui/blur-fade';
 
 function AssistantSettings() {

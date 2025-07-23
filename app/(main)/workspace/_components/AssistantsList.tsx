@@ -25,10 +25,11 @@ import { LogOut, UserCircle2 } from 'lucide-react';
 import Profile from './Profile';
 import { googleLogout } from '@react-oauth/google';
 import { useRouter } from 'next/navigation';
+import SearchAssistant from './SearchAssistant';
 
 function AssistantsList() {
 
-  const [assistantList , setAssistantList] = useState<AssistantType[]>();
+  const [assistantList , setAssistantList] = useState<AssistantType[]>([]);
   const [openProfile , setOpenProfile] = useState<boolean>(false);
 
   const {user , setUser} = useContext(AuthContext);
@@ -68,13 +69,17 @@ function AssistantsList() {
           </Button>
         </AddNewAssistant>
 
-        <Input
-          className="bg-white mt-4"
-          placeholder="Search"
-        />
+        <div
+         className = 'mt-4'
+        >
+          <SearchAssistant list = {assistantList}/>
+        </div>
 
         <div className="flex-1 overflow-y-auto scrollbar-hide mt-4 space-y-4 pr-1">
-          {assistantList?.map((assist, index) => (
+          {assistantList
+          ?.slice()
+          .sort((a , b) => (a.id === assistant?.id ? -1 : b.id === assistant?.id ? 1 : 0))
+          .map((assist, index) => (
             <BlurFade key={index} delay={index * 0.05} inView>
               <div
                 key={assist.id}

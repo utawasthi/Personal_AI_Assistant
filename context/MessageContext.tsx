@@ -19,7 +19,7 @@ export const MessageContext = createContext<MessageContextType>({
 
 
 export const MessageProvider = ({children} : {children : ReactNode}) => {
-  const [messages , setMessages] = useState<MessageType[]>();
+  const [messages , setMessages] = useState<MessageType[]>([]);
 
   return (
     <MessageContext.Provider value = {{messages , setMessages}}>
