@@ -145,7 +145,7 @@ function AddNewAssistant({children} : any) {
                       </div>
                   </div>
                   <div className = 'mt-4'>
-                      <h2 className = 'my-2 text-gray-600'>
+                      <h2 className = 'my-2 text-gray-600 dark:text-cyan-500'>
                         Model : 
                       </h2>
                     <Select 
@@ -186,7 +186,7 @@ function AddNewAssistant({children} : any) {
                     </Select>
                   </div>
                   <div className = 'mt-5'>
-                    <h2 className = 'my-2 text-gray-600'>
+                    <h2 className = 'my-2 text-gray-600 dark:text-cyan-500'>
                       Instructions : 
                     </h2>
                     <Textarea 

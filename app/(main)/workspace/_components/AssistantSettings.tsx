@@ -76,11 +76,11 @@ function AssistantSettings() {
             className = 'rounded-xl h-[80px] w-[80px] object-cover'
           />
           <div>
-            <h2> {assistant?.name} </h2>
+            <h2 className = 'font-medium dark:text-cyan-400'> {assistant?.name} </h2>
             <p className = 'font-medium text-gray-400'> {assistant?.title} </p>
           </div>
           <div className = 'mt-4'>
-            <h2 className = 'my-2 text-gray-600 dark:text-white/80'>
+            <h2 className = 'my-2 text-gray-600 font-medium dark:text-cyan-400'>
               Model : 
             </h2>
             <Select 
@@ -122,7 +122,7 @@ function AssistantSettings() {
             </Select>
           </div>
           <div className = 'mt-4'>
-            <h2 className = 'my-2 text-gray-600 dark:text-white/90'>
+            <h2 className = 'my-2 font-medium text-gray-600 dark:text-cyan-400'>
               Instructions : 
             </h2>
             <Textarea 

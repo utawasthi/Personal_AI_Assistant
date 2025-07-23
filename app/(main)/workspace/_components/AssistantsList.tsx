@@ -79,7 +79,7 @@ function AssistantsList() {
               <div
                 key={assist.id}
                 className={`p-2 flex items-center gap-2 hover:bg-gray-200 hover:dark:bg-slate-900 rounded-xl cursor-pointer
-                  ${assistant?.id === assist.id && 'bg-gray-200 dark:bg-slate-950'}
+                  ${assistant?.id === assist.id && 'bg-gray-200 dark:bg-zinc-800'}
                 `}
                 onClick={() => setAssistant(assist)}
               >
@@ -91,7 +91,7 @@ function AssistantsList() {
                   className="rounded-xl w-[60px] h-[60px] object-cover"
                 />
                 <div className="p-1 flex flex-col justify-center">
-                  <h2 className="font-medium text-md text-gray-700 dark:text-white">
+                  <h2 className="font-medium text-md text-gray-700 dark:text-cyan-400">
                     {assist.name}
                   </h2>
                   <h2 className="text-[13px] text-gray-500 dark:text-gray-300">
