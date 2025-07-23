@@ -16,6 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { faqs } from '@/services/Faqs';
+import ImageSlider from './_components/ImageSlider';
 
 function SignIn() {
   const router = useRouter();
@@ -86,9 +87,9 @@ function SignIn() {
           </div>
         </div>
         <div
-          className = 'col-span-5'
+          className = 'col-span-5 h-screen'
         >
-          Hi
+          <ImageSlider/>
         </div>
       </div>
       <div className = 'flex flex-col justify-center px-10 m-10'>
@@ -107,7 +108,7 @@ function SignIn() {
                 >
                    <AccordionItem value = {q.id}>
                       <AccordionTrigger
-                       className = 'text-xl cursor-pointer dark:text-cyan-400/90'
+                       className = 'text-xl cursor-pointer dark:text-cyan-400'
                       >
                         {q.question}
                       </AccordionTrigger>
