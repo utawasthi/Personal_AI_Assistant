@@ -29,7 +29,6 @@ interface MessageType {
 function ChatUI() {
   const {input , setInput} = useContext(ChatInputContext);
   const {messages , setMessages} = useContext(MessageContext);
-  // const [messages, setMessages] = useState<MessageType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const chatRef = useRef<any>(null);
@@ -158,9 +157,7 @@ function ChatUI() {
                   {loading && index === messages?.length - 1 ? (
                     <div className="flex items-center gap-2">
                       <Loader2Icon className="animate-spin w-4 h-4 text-gray-500" />
-                      <span
-                       className = 'dark:bg-[#757576]'
-                      >
+                      <span>
                         {msg.content}
                       </span>
                     </div>
