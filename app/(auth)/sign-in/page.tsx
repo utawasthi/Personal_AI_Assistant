@@ -43,10 +43,10 @@ function SignIn() {
   });
 
   return (
-    <div className = 'overflow-y-auto scrollbar-hide'>
-      <div className="grid grid-cols-10 min-h-screen bg-white dark:bg-[#0a0f0f] transition-colors overflow-hidden">
+    <div className = 'h-screen overflow-y-scroll scrollbar-hide'>
+      <div className="grid grid-cols-10 min-h-screen bg-white dark:bg-black transition-colors">
         <div 
-          className="col-span-10 lg:col-span-5 flex flex-col items-center min-h-screen p-8 bg-white dark:bg-[#111]"
+          className="col-span-10 lg:col-span-5 flex flex-col items-center min-h-screen p-8 bg-white dark:bg-black"
         >
           <div className = 'flex items-center justify-center gap-4 mb-20'>
             <Image
@@ -60,11 +60,10 @@ function SignIn() {
               Orbit Mind
             </h2>
           </div>
-          <div className = 'dark:text-white/90 mt-20 mb-10'>
+          <div className = 'dark:text-white/90 mt-20 mb-10 font-mono'>
               <p className = 'text-5xl'>
-                <span className = 'dark:text-cyan-300 font-medium'>O</span>rbit Mind remembers,
-                <br/>
-                so you don't have to!
+                <span className = 'dark:text-cyan-300 font-medium'>O</span>rbit Mind remembers,so
+                you don't have to!
               </p>
               <p className = 'text-xl font-light dark:text-cyan-300'>
                 Where every assistant is smarter than your group chat.
