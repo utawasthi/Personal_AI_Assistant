@@ -4,6 +4,8 @@ import React from 'react'
 import Header from './_components/Header';
 import Provider from './provider';
 import { usePathname } from 'next/navigation';
+import { ChatInputContext, ChatInputProvider } from '@/context/ChatInputContext';
+import { MessageProvider } from '@/context/MessageContext';
 
 function WorkspaceLayout({
   children,
@@ -18,7 +20,11 @@ function WorkspaceLayout({
     <Provider>
       <div>
         {showHeader && <Header />}
-        {children}
+        <ChatInputProvider>
+          <MessageProvider>
+            {children}
+          </MessageProvider>
+        </ChatInputProvider>
       </div>
     </Provider>
   )
