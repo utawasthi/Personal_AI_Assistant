@@ -54,13 +54,7 @@ function ChatUI() {
 
   const handleOnSendMessage = async () => {
     if (!input.trim()) return;
-
-    setMessages((prev) => [
-      ...prev,
-      { role: "user", content: input },
-      { role: "assistant", content: getRandomLoadingMessage() },
-    ]);
-
+    
     const userInput = input;
     setInput("");
     setLoading(true);
@@ -69,11 +63,22 @@ function ChatUI() {
       (item) => item.model === assistant.aiModelId
     );
 
+    const userMessage = {role : "user" as const , content : userInput};
+    const loadingMessage = {role : "assistant" as const , content : getRandomLoadingMessage()};
+
+    setMessages((prev) => [...prev , userMessage , loadingMessage]);
+
     try {
+      const recentMessages = [...messages , userMessage].slice(-6);
       const res = await axios.post("/api/ai-model", {
         provider: AiModel?.model,
-        userInput: userInput,
-        aiResponse : messages[messages.length - 1].content,
+        messages : [
+          {
+            role : "system",
+            content : assistant?.instruction,
+          },
+          ...recentMessages,
+        ]
       });
 
       setMessages((prev) => [
