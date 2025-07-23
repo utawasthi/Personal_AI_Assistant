@@ -7,11 +7,19 @@ import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { AuthContext, UserType } from "@/context/AuthContext";
 import { GetAuthUserData } from "@/services/GlobalApi";
 import { api } from "@/convex/_generated/api";
+import { useRouter } from "next/navigation";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<UserType | null>(null);
 
   const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!user) router.push('/sign-in');
+    else router.push('/ai-assistants');
+  } , [user]);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -48,6 +56,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
       } catch (error) {
         console.error("Failed to restore user:", error);
         setUser(null);
+        router.push('/sign-in');
       }
     };
 
