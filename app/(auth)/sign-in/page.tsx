@@ -7,7 +7,7 @@ import { GetAuthUserData } from '@/services/GlobalApi';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useMutation } from 'convex/react';
 import { useRouter } from 'next/navigation';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   Accordion,
@@ -17,11 +17,27 @@ import {
 } from "@/components/ui/accordion"
 import { faqs } from '@/services/Faqs';
 import ImageSlider from './_components/ImageSlider';
+import Footer from './_components/Footer';
+
 
 function SignIn() {
   const router = useRouter();
   const CreateUser = useMutation(api.users.CreateUser);
   const { user, setUser } = useContext(AuthContext);
+
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const newOpacity = Math.max(1 - scrollTop / 400, 0);
+      setOpacity(newOpacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -44,9 +60,16 @@ function SignIn() {
 
   return (
     <div className = 'h-screen overflow-y-scroll scrollbar-hide'>
-      <div className="grid grid-cols-10 min-h-screen bg-white dark:bg-black transition-colors">
+      <div
+        className="fixed top-0 left-0 w-full h-[100vh] -z-10 bg-cover bg-center transition-opacity duration-500"
+        style={{
+          backgroundImage: "url('/bg-home2.jpg')",
+          opacity: opacity,
+        }}
+      />
+      <div className="grid grid-cols-10 min-h-screen bg-white dark:bg-black/70 transition-colors">
         <div 
-          className="col-span-10 lg:col-span-5 flex flex-col items-center min-h-screen p-8 bg-white dark:bg-black"
+          className="col-span-10 lg:col-span-5 flex flex-col items-center min-h-screen p-8 bg-white dark:bg-black/40"
         >
           <div 
            className = 'flex items-center justify-center gap-4 mb-20'
@@ -59,10 +82,10 @@ function SignIn() {
               className="dark:invert h-[40px] w-[40px]"
             />
             <h2 className = 'text-3xl'>
-              Orbit Mind
+              <span className = 'dark:text-cyan-400'>O</span>rbit <span className = 'dark:text-cyan-400'>M</span>ind
             </h2>
           </div>
-          <div className = 'flex flex-col items-center justify-center dark:text-white/90 mt-20 mb-10 font-mono'>
+          <div className = 'flex flex-col items-center justify-center dark:text-white/90 mt-20 mb-10 font-mono font-light'>
               <p className = 'text-5xl'>
                 <span className = 'dark:text-cyan-300 font-medium'>O</span>rbit Mind remembers,so
                 you don't have to!
@@ -73,7 +96,7 @@ function SignIn() {
           </div>
           <div className = 'mt-10'>
             <Button
-              className="w-full flex justify-between bg-black text-white dark:bg-cyan-400/95 dark:text-black hover:bg-gray-900 dark:hover:bg-cyan-500 transition py-6 rounded-xl px-10 cursor-pointer"
+              className="w-full flex justify-between bg-black text-white dark:bg-cyan-400/20 backdrop-blur-md dark:border dark:border-white/20 dark:text-white hover:bg-gray-900 dark:hover:bg-cyan-400/30 transition py-6 rounded-2xl px-10 cursor-pointer"
               onClick={() => googleLogin()}
             >
               <Image
@@ -93,7 +116,7 @@ function SignIn() {
           <ImageSlider/>
         </div>
       </div>
-      <div className = 'flex flex-col justify-center px-10 m-10'>
+      <div className = 'flex flex-col justify-center p-10 my-10 dark:bg-black/70'>
         <h1 
          className = 'text-center text-3xl font-light font-sans tracking-wide'
         >
@@ -114,7 +137,7 @@ function SignIn() {
                         {q.question}
                       </AccordionTrigger>
                       <AccordionContent
-                        className = 'text-lg cursor-pointer'
+                        className = 'text-lg cursor-pointer font-light'
                       >
                         {q.content}
                       </AccordionContent>
@@ -124,6 +147,9 @@ function SignIn() {
             }
           </Accordion>
         </div>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );
