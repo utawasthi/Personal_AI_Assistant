@@ -116,7 +116,7 @@ function SignIn() {
           <ImageSlider/>
         </div>
       </div>
-      <div className = 'flex flex-col justify-center p-10 my-10 dark:bg-black/70'>
+      <div className = 'flex flex-col justify-center p-10 dark:bg-black/75'>
         <h1 
          className = 'text-center text-3xl font-light font-sans tracking-wide'
         >

@@ -10,7 +10,7 @@ const list2 : string[] = [
 
 function Footer() {
   return (
-    <div className = 'grid grid-cols-12 dark:bg-black/70 p-3'>
+    <div className = 'grid grid-cols-12 dark:bg-black/85 p-3'>
       <div 
         className = 'col-span-4 md:col-span-6 flex flex-col  justify-start gap-5 p-3'
       >
