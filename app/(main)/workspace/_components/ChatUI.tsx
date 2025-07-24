@@ -200,7 +200,7 @@ function ChatUI() {
           }}
         />
         <Button 
-          className="rounded-full cursor-pointer" 
+          className = "rounded-full cursor-pointer" 
           onClick={handleOnSendMessage}
           disabled = {loading}
         >

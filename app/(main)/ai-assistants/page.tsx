@@ -150,7 +150,7 @@ function AiAssistants() {
                   alt = {assistant.title}
                   width = {600}
                   height = {600}
-                  className = 'h-[200px] w-[200px] object-cover'
+                  className = 'h-[200px] w-[200px] object-cover rounded-xl'
                 />
                 <h2 className = 'dark:text-gray-300 text-lg font-semibold text-gray-600'>
                   {assistant.name}
