@@ -3,7 +3,7 @@
 > Smart. Conversational. Context-Aware.  
 > Your own AI assistant, built for real-world use — and ready for production.
 
-![demo screenshot](./public/demo-screenshot.png)
+![demo screenshot](./public/home-page-screenshot.png)
 
 ---
 
