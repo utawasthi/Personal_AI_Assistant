@@ -19,9 +19,9 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if(!user && !loadingUser) router.push('/sign-in');
-  } , [user , loadingUser]);
+  // useEffect(() => {
+  //   if(!user && !loadingUser) router.push('/sign-in');
+  // } , [user , loadingUser]);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -61,7 +61,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
       } catch (error) {
         console.error("Failed to restore user:", error);
         setUser(null);
-        router.push('/sign-in');
+        // router.push('/sign-in');
       }
       finally{
         setLoadingUser(false);

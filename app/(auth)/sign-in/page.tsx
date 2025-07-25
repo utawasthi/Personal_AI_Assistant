@@ -18,7 +18,8 @@ import {
 import { faqs } from '@/services/Faqs';
 import ImageSlider from './_components/ImageSlider';
 import Footer from './_components/Footer';
-import { featuresList } from '@/services/Features';
+import { featuresList, freePlan } from '@/services/Features';
+import CheckMark from './_components/CheckMark';
 
 
 function SignIn() {
@@ -132,7 +133,10 @@ function SignIn() {
        </div>
        <div className="w-full overflow-hidden">
           {featuresList.map((f, ind) => (
-            <div className = 'border-b-1'>
+            <div 
+              key = {ind}
+              className = 'border-b-1 p-3' 
+            >
               <Accordion type = 'single' collapsible>
                 <AccordionItem value={`${ind}`}>
                   <AccordionTrigger className="text-xl cursor-pointer dark:text-cyan-400">
@@ -145,6 +149,35 @@ function SignIn() {
               </Accordion>
             </div>
           ))}
+        </div>
+      </div>
+      <div className = 'grid grid-cols-2 gap-4'>
+        <div className = 'col-span-2 sm:col-span-1'>
+          <div className = 'flex flex-col gap-2 p-5 bg-black/70'>
+            <div>
+              <h1 className = 'text-2xl font-semibold text-cyan-500 tracking-wider'>Free</h1>
+              <h2 className = 'font-medium text-gray-300'>Try Orbit Mind</h2>
+            </div>
+            <div className = 'flex flex-col gap-3 justify-center'>
+              {
+                freePlan?.map((f , ind) => (
+                  <div key = {ind}>
+                    {
+                      <div className = 'flex gap-4 justify-start items-center'>
+                        <CheckMark/>
+                        <div className = 'font-light tracking-wide'>
+                          {f}
+                        </div>
+                      </div>
+                    }
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+        <div className = 'col-span-2 sm:col-span-1'>
+          Professional
         </div>
       </div>
       <div className = 'flex flex-col justify-center p-10 dark:bg-black/75'>

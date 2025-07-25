@@ -21,3 +21,11 @@ export const featuresList : featureType[] = [
     content: "Switch between assistants, change instructions mid-chat, and reframe questions — your assistant adapts on the fly.",
   },
 ];
+
+export const freePlan : string[] = [
+  'Chat on web , iOS , and Android',
+  'Generate code and visualize data',
+  'Write , edit and create content',
+  'Analyze text and images',
+  'Ability to search the web',
+];
