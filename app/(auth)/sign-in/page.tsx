@@ -18,7 +18,7 @@ import {
 import { faqs } from '@/services/Faqs';
 import ImageSlider from './_components/ImageSlider';
 import Footer from './_components/Footer';
-import { featuresList, freePlan } from '@/services/Features';
+import { featuresList, freePlan, proPlan } from '@/services/Features';
 import CheckMark from './_components/CheckMark';
 
 
@@ -61,7 +61,7 @@ function SignIn() {
   });
 
   return (
-    <div className = 'h-screen overflow-y-scroll scrollbar-hide'>
+    <div className = 'relative h-screen overflow-y-scroll scrollbar-hide'>
       <div
         className="fixed top-0 left-0 w-full h-[100vh] -z-10 bg-cover bg-center transition-opacity duration-500"
         style={{
@@ -69,7 +69,7 @@ function SignIn() {
           opacity: opacity,
         }}
       />
-      <div className="grid grid-cols-10 min-h-screen bg-white dark:bg-black/70 transition-colors">
+      <div className="grid grid-cols-10 min-h-screen bg-white dark:bg-black/65 transition-colors">
         <div 
           className="col-span-10 lg:col-span-5 flex flex-col items-center min-h-screen p-8 bg-white dark:bg-black/40"
         >
@@ -118,12 +118,12 @@ function SignIn() {
           <ImageSlider/>
         </div>
       </div>
-      <div className = 'flex flex-col w-full items-center gap-6 p-2 min-h-screen dark:bg-black/50 px-6'>
+      <div className = 'flex flex-col w-full items-center gap-6 p-2 dark:bg-black/65 px-6'>
        <div className = 'flex flex-col w-full items-center gap-6'>
           <div 
-            className = 'text-4xl mt-2 tracking-wider font-sans dark:text-cyan-400 text-center'
+            className = 'text-4xl mt-2 tracking-wider font-sans text-center'
           >
-            Meet Orbit Mind
+            <span className = 'text-cyan-300'>Me</span>et <span className = 'text-cyan-300'>Or</span>bit <span className = 'text-cyan-300'>Mi</span>nd
           </div>
           <div 
             className = 'font-light tracking-wide text-xl text-center'
@@ -151,40 +151,81 @@ function SignIn() {
           ))}
         </div>
       </div>
-      <div className = 'grid grid-cols-2 gap-4'>
-        <div className = 'col-span-2 sm:col-span-1'>
-          <div className = 'flex flex-col gap-2 p-5 bg-black/70'>
-            <div>
-              <h1 className = 'text-2xl font-semibold text-cyan-500 tracking-wider'>Free</h1>
-              <h2 className = 'font-medium text-gray-300'>Try Orbit Mind</h2>
-            </div>
-            <div className = 'flex flex-col gap-3 justify-center'>
-              {
-                freePlan?.map((f , ind) => (
-                  <div key = {ind}>
-                    {
-                      <div className = 'flex gap-4 justify-start items-center'>
-                        <CheckMark/>
-                        <div className = 'font-light tracking-wide'>
-                          {f}
+      <div className = 'bg-black/70 p-5'>
+        <div className = 'text-center text-3xl font-mono my-5'>
+          <span className = 'text-cyan-300'>Exp</span>olore <span className = 'text-cyan-300'>Pla</span>ns
+        </div>
+        <div className = 'grid grid-cols-2 min-h-screen'>
+          <div className = 'col-span-2 md:col-span-1'>
+            <div className = 'flex flex-col gap-2 p-6'>
+              <div className = 'mb-3'>
+                <h1 className = 'text-2xl font-semibold text-cyan-500 tracking-wider'>Free</h1>
+                <h2 className = 'font-medium text-gray-300'>Try Orbit Mind</h2>
+              </div>
+              <div className = 'flex flex-col gap-3 justify-center'>
+                {
+                  freePlan?.map((f , ind) => (
+                    <div key = {ind}>
+                      {
+                        <div className = 'flex gap-4 justify-start items-center'>
+                          <CheckMark/>
+                          <div className = 'font-light tracking-wide'>
+                            {f}
+                          </div>
                         </div>
-                      </div>
-                    }
-                  </div>
-                ))
-              }
+                      }
+                    </div>
+                  ))
+                }
+              </div>
+              <div className = 'mt-3 p-1'>
+                <div className = 'font-bold text-2xl'>$0</div>
+                <div className = 'text-sm font-light tracking-wide'>Free for everyone</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className = 'col-span-2 sm:col-span-1'>
-          Professional
-        </div>
+          <div className = 'col-span-2 md:col-span-1'>
+           <div className = 'flex flex-col gap-2 p-6'>
+              <div className = 'mb-3'>
+                <h1 className = 'text-2xl font-semibold text-cyan-500 tracking-wider'>Pro</h1>
+                <h2 className = 'font-medium text-gray-300'>For everyday productivity</h2>
+              </div>
+              <div className = 'font-light tracking-wide'>
+                Everything in Free , plus : 
+              </div>
+              <div className = 'flex flex-col gap-3 justify-center'>
+                {
+                  proPlan?.map((f , ind) => (
+                    <div key = {ind}>
+                      {
+                        <div className = 'flex gap-4 justify-start items-center'>
+                          <CheckMark/>
+                          <div className = 'font-light tracking-wide'>
+                            {f}
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  ))
+                }
+              </div>
+              <div className = 'mt-3 p-1'>
+                <div className = 'font-bold text-2xl'>$10</div>
+                <div className = 'text-sm font-light tracking-wide'>Per month billed monthly</div>
+              </div>
+            </div>
+          </div>
+       </div>
+       <div className = 'text-center text-sm font-light text-zinc-200 -mt-20'>
+        * Prices shown do not include applicable tax. 
+        <span className = 'underline ml-2 text-cyan-300'>Usage limits apply.</span>
+       </div>
       </div>
-      <div className = 'flex flex-col justify-center p-10 dark:bg-black/75'>
+      <div className = 'flex flex-col justify-center p-10 dark:bg-black/70'>
         <h1 
          className = 'text-center text-3xl font-light font-sans tracking-wide'
         >
-          Frequently asked questions
+          <span className = 'text-cyan-300'>Fre</span>quently asked questions
         </h1>
         <div className = 'mt-5'>
           <Accordion type="single" collapsible>
@@ -212,7 +253,7 @@ function SignIn() {
           </Accordion>
         </div>
       </div>
-      <div>
+      <div className = 'relative mt-50'>
         <Footer/>
       </div>
     </div>

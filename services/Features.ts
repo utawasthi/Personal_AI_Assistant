@@ -29,3 +29,15 @@ export const freePlan : string[] = [
   'Analyze text and images',
   'Ability to search the web',
 ];
+
+export const proPlan : string[] = [
+  'More usage',
+  'Unlimited Tokens',
+  'Priority access to new features',
+  'Access Orbit Code directly in your terminal',
+  'Access to unlimited Projects to organize chats and documents',
+  'Access to Research',
+  'Extended thinking for complex work',
+  'Ability to use more AI models',
+  'Save and access files directly within Orbit Mind'
+]
