@@ -20,7 +20,7 @@ function Footer() {
             alt = 'logo'
             height = {40}
             width = {40}
-            className = 'w-[40px] h-[40px] object-cover'
+            className = 'w-[50px] h-[50px] object-cover'
           />
         </div>
         <div

@@ -81,7 +81,7 @@ function SignIn() {
               alt="Orbit Mind Logo"
               width={30}
               height={30}
-              className="dark:invert h-[40px] w-[40px]"
+              className="dark:invert h-[60px] w-[60px]"
             />
             <h2 className = 'text-3xl'>
               <span className = 'dark:text-cyan-400'>O</span>rbit <span className = 'dark:text-cyan-400'>M</span>ind
