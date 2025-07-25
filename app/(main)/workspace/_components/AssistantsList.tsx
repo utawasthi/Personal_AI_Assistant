@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { AuthContext } from '@/context/AuthContext';
 import { api } from '@/convex/_generated/api';
 import { Id } from '@/convex/_generated/dataModel';
@@ -78,13 +77,13 @@ function AssistantsList() {
         <div className="flex-1 overflow-y-auto scrollbar-hide mt-4 space-y-4 pr-1">
           {assistantList
           ?.slice()
-          .sort((a , b) => (a.id === assistant?.id ? -1 : b.id === assistant?.id ? 1 : 0))
+          .sort((a , b) => (a.name === assistant?.name ? -1 : b.name === assistant?.name ? 1 : 0))
           .map((assist, index) => (
             <BlurFade key={index} delay={index * 0.05} inView>
               <div
-                key={assist.id}
+                key={assist.name}
                 className={`p-2 flex items-center gap-2 hover:bg-gray-200 hover:dark:bg-slate-900 rounded-xl cursor-pointer
-                  ${assistant?.id === assist.id && 'bg-gray-200 dark:bg-zinc-800'}
+                  ${assistant?.name === assist.name && 'bg-gray-200 dark:bg-zinc-800'}
                 `}
                 onClick={() => setAssistant(assist)}
               >
