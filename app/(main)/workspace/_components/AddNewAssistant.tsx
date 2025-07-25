@@ -171,7 +171,7 @@ function AddNewAssistant({children} : any) {
                             >
                               <div
                                 key = {model.name}
-                                className = 'flex items-center gap-2 cursor-pointer hover:bg-slate-100 my-2'
+                                className = 'flex items-center gap-2 cursor-pointer my-2'
                               >
                                 <Image 
                                   src = {model.logo}

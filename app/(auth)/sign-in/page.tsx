@@ -153,7 +153,7 @@ function SignIn() {
       </div>
       <div className = 'bg-black/70 p-5'>
         <div className = 'text-center text-3xl font-mono my-5'>
-          <span className = 'text-cyan-300'>Exp</span>olore <span className = 'text-cyan-300'>Pla</span>ns
+          <span className = 'text-cyan-300'>Exp</span>lore <span className = 'text-cyan-300'>Pla</span>ns
         </div>
         <div className = 'grid grid-cols-2 min-h-screen'>
           <div className = 'col-span-2 md:col-span-1'>
