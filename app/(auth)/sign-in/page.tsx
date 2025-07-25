@@ -216,7 +216,7 @@ function SignIn() {
             </div>
           </div>
        </div>
-       <div className = 'text-center text-sm font-light text-zinc-200 -mt-20'>
+       <div className = 'text-center text-sm font-light text-zinc-200 md:-mt-20'>
         * Prices shown do not include applicable tax. 
         <span className = 'underline ml-2 text-cyan-300'>Usage limits apply.</span>
        </div>
