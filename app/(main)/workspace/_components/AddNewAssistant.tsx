@@ -31,7 +31,7 @@ const Default_Assistant = {
   name : '',
   title : '',
   instruction : '',
-  id : 0,
+  id: 0,
   sampleQuestions : [],
   userInstruction : '',
   aiModelId : '',
@@ -61,10 +61,15 @@ function AddNewAssistant({children} : any) {
       return;
     }
 
+    const newAssistant = {
+      ...selectedAssistant,
+      id : Math.floor(Math.random() * 1_000_000_000),
+    }
+
     try{
       setLoading(true);
       const result = await addAssistant({
-        records : [selectedAssistant] ,
+        records : [newAssistant] ,
         uid : user?._id as Id<"users">,
       });
       toast("New Assistant Added !!");
@@ -131,7 +136,7 @@ function AddNewAssistant({children} : any) {
                           />
                         </AssistantAvatar>
                       }
-                      <div className = 'flex gap-3 flex-col w-full'>
+                      <div className = 'flex gap-3 flex-col w-full dark:text-white/80'>
                         <Input
                           placeholder = 'Name of Assistant'
                           onChange = {(e) => handleInputChange('name' , e.target.value)}
@@ -175,7 +180,7 @@ function AddNewAssistant({children} : any) {
                                   width = {20}
                                   className = 'rounded-full'
                                 />
-                                <h2 className = 'font-light text-md text-gray-700'>
+                                <h2 className = 'font-light text-md text-gray-700 dark:text-white/80'>
                                   {model.name}
                                 </h2>
                               </div>
