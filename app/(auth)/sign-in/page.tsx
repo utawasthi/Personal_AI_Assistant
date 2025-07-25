@@ -18,6 +18,7 @@ import {
 import { faqs } from '@/services/Faqs';
 import ImageSlider from './_components/ImageSlider';
 import Footer from './_components/Footer';
+import { featuresList } from '@/services/Features';
 
 
 function SignIn() {
@@ -114,6 +115,36 @@ function SignIn() {
           className = 'col-span-5 h-screen'
         >
           <ImageSlider/>
+        </div>
+      </div>
+      <div className = 'flex flex-col w-full items-center gap-6 p-2 min-h-screen dark:bg-black/50 px-6'>
+       <div className = 'flex flex-col w-full items-center gap-6'>
+          <div 
+            className = 'text-4xl mt-2 tracking-wider font-sans dark:text-cyan-400 text-center'
+          >
+            Meet Orbit Mind
+          </div>
+          <div 
+            className = 'font-light tracking-wide text-xl text-center'
+          >
+            Claude is a next generation AI assistant built by Anthropic and trained to be safe, accurate, and secure to help you do your best work.
+          </div>
+       </div>
+       <div className="w-full overflow-hidden">
+          {featuresList.map((f, ind) => (
+            <div className = 'border-b-1'>
+              <Accordion type = 'single' collapsible>
+                <AccordionItem value={`${ind}`}>
+                  <AccordionTrigger className="text-xl cursor-pointer dark:text-cyan-400">
+                    {f.feature}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-lg cursor-pointer font-light">
+                    {f.content}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          ))}
         </div>
       </div>
       <div className = 'flex flex-col justify-center p-10 dark:bg-black/75'>
