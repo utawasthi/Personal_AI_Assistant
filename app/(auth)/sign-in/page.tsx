@@ -77,7 +77,7 @@ function SignIn() {
            className = 'flex items-center justify-center gap-4 mb-20'
           >
             <Image
-              src="/logo.svg"
+              src="/orbit.png"
               alt="Orbit Mind Logo"
               width={30}
               height={30}

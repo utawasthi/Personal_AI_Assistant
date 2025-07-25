@@ -12,7 +12,7 @@ function Header() {
     <div className = 'flex justify-between p-3 px-6 items-center shadow-sm'>
       <div className = 'flex justify-start items-center gap-10'>
         <Image 
-          src = {'/logo.svg'}
+          src = {'/orbit.png'}
           alt = 'logo'
           width = {50}
           height = {50}

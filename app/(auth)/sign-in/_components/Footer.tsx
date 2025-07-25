@@ -16,7 +16,7 @@ function Footer() {
       >
         <div>
           <Image 
-            src = {'/logo.svg'}
+            src = {'/orbit.png'}
             alt = 'logo'
             height = {40}
             width = {40}

@@ -82,7 +82,7 @@ function Profile( {openDialog  , setOpenDialog} : ProfileProps) {
       subscription_id : subscriptionId,
       name : 'AI Assistant by utawasthi',
       description : 'This is my first project man',
-      image : '/logo.svg',
+      image : '/orbit.png',
       handler : async function (res : any){
         console.log(res);
         // console.log(res.razorpay_payment_id);
