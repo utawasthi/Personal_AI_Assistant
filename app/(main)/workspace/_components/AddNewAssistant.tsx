@@ -60,7 +60,11 @@ function AddNewAssistant({children} : any) {
         records : [newAssistant] ,
         uid : user?._id as Id<"users">,
       });
-      toast("New Assistant Added !!");
+      const inserted = result.find(r => r.status === "inserted");
+      const skipped = result.find(r => r.status === "skipped");
+
+      if(inserted) toast.success(`${inserted.title} added successfully!`);
+      if(skipped) toast.warning(`${skipped.title} already exists`);
       setAssistant(null);
     }
     catch(err : any){
