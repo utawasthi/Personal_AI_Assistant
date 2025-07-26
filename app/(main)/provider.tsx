@@ -45,7 +45,7 @@ function Provider({
       setUser(result);
     }
     catch(err){
-     console.log("bhai error yahan se aa rhi h" , err);
+      console.log(err);
     }
   }
 

@@ -3,7 +3,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import AiAssistantsList from "@/services/AiAssistantsList"
+import { assistantImages } from "@/services/AiAssistantAvatar"
 import Image from "next/image"
 
 function AssistantAvatar({children , selectedImage} : any) {
@@ -15,17 +15,17 @@ function AssistantAvatar({children , selectedImage} : any) {
           className = 'grid grid-cols-5 gap-2'
         >
           {
-            AiAssistantsList.map((assistant , index) => (
+            assistantImages.map((img, index) => (
               <div 
                 key = {index}
               >
                 <Image 
-                  src = {assistant.image}
-                  alt = {assistant.name}
+                  src = {img}
+                  alt = {'assistant'}
                   width = {80}
                   height = {80}
                   className = 'cursor-pointer w-[30px] h-[30px] rounded-lg object-cover'
-                  onClick = {() => selectedImage(assistant.image)}
+                  onClick = {() => selectedImage(img)}
                 />
               </div>
             ))
