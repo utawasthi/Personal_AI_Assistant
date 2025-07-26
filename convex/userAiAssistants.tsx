@@ -13,21 +13,46 @@ export const InsertSelectedAssistants = mutation({
         instruction: v.string(),
         userInstruction: v.string(),
         sampleQuestions: v.array(v.string()),
-        aiModelId : v.optional(v.string()),
+        aiModelId: v.optional(v.string()),
       })
     ),
   },
   handler: async (ctx, args) => {
-    const inserted = await Promise.all(
-      args.records.map(async (record) => {
-        return await ctx.db.insert("userAiAssistants", {
+    const results = [];
+
+    for (const record of args.records) {
+      const existing = await ctx.db
+        .query("userAiAssistants")
+        .filter(q =>
+          q.and(
+            q.eq(q.field("uid"), args.uid),
+            q.eq(q.field("title"), record.title)
+          )
+        )
+        .first();
+
+      if (existing) {
+        results.push({
+          title: record.title,
+          status: "skipped",
+          reason: "duplicate"
+        });
+      } else {
+        const insertedId = await ctx.db.insert("userAiAssistants", {
           ...record,
-          aiModelId : 'Google: Gemma 3n 2B',
+          aiModelId: record.aiModelId ?? "Google: Gemma 3n 2B",
           uid: args.uid,
         });
-      })
-    );
-    return inserted;
+
+        results.push({
+          title: record.title,
+          status: "inserted",
+          id: insertedId,
+        });
+      }
+    }
+
+    return results;
   },
 });
 
