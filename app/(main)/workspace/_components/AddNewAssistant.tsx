@@ -87,7 +87,8 @@ function AddNewAssistant({children} : any) {
                 <div className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mt-2'>
                   {
                     AiAssistantsList.map((assistant , index) => (
-                      <div className = 'col-span-1 p-3 border-[0.1px] m-3 hover:bg-secondary flex gap-2 items-center rounded-xl cursor-pointer'
+                      <div 
+                       className = {selectedAssistant === assistant ? 'bg-zinc-800 col-span-1 p-3 border-[0.1px] m-3 hover:bg-secondary flex gap-2 items-center rounded-xl cursor-pointer' : 'col-span-1 p-3 border-[0.1px] m-3 hover:bg-secondary flex gap-2 items-center rounded-xl cursor-pointer'}
                       key = {index}
                       onClick = {() => setSelectedAssistant(assistant)}
                       >
