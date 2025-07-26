@@ -14,8 +14,8 @@ function Header() {
         <Image 
           src = {'/orbit.png'}
           alt = 'logo'
-          width = {50}
-          height = {50}
+          width = {60}
+          height = {60}
         />
         <h2 className = 'text-3xl font-bold tracking-wide '>Orbit Mind</h2>
       </div>
