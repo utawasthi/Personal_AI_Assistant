@@ -128,7 +128,7 @@ function SignIn() {
           <div 
             className = 'font-light tracking-wide text-xl text-center'
           >
-            Claude is a next generation AI assistant built by Anthropic and trained to be safe, accurate, and secure to help you do your best work.
+            Orbit Mind is a next-generation AI workspace built to be intelligent, contextual, and collaborative — helping you think better, write faster, and organize effortlessly.
           </div>
        </div>
        <div className="w-full overflow-hidden">
