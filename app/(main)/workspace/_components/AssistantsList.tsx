@@ -25,6 +25,7 @@ import Profile from './Profile';
 import { googleLogout } from '@react-oauth/google';
 import { useRouter } from 'next/navigation';
 import SearchAssistant from './SearchAssistant';
+import CreateNewAssistant from './CreateNewAssistant';
 
 function AssistantsList() {
 
@@ -57,10 +58,20 @@ function AssistantsList() {
     }
 
   return (
-      <div className="flex flex-col h-screen bg-black border-r-[0.5px] p-5">
-        <h2 className="font-semibold text-md text-white">
-          Your Personal AI Assistants
-        </h2>
+      <div className="flex flex-col h-screen bg-black border-r-[0.5px] p-4">
+        <Image
+          src = {'/orbit.png'}
+          alt = {'logo'}
+          height = {40}
+          width = {40}
+          className = 'object-cover h-[50px] w-[50px]'
+        />
+
+        <CreateNewAssistant>
+          <Button className="w-full mt-3 text-sm font-medium cursor-pointer dark:bg-cyan-950 dark:text-white/95">
+            + Create Your Own
+          </Button>
+        </CreateNewAssistant>
 
         <AddNewAssistant>
           <Button className="w-full mt-3 text-sm font-medium cursor-pointer dark:bg-cyan-950 dark:text-white/95">
