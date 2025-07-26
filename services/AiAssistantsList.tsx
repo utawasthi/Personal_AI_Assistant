@@ -1,7 +1,7 @@
 export default [
     {
         id: 1,
-        name: 'Jack',
+        name: 'Akshit',
         title: 'Fitness Coach 💪',
         image: '/fitness-coach.png',
         instruction: `Answer fitness-related questions only.`,
@@ -43,7 +43,7 @@ export default [
     },
     {
         id: 4,
-        name: 'Liam',
+        name: 'Yousuf',
         title: 'YouTube Script Writer 🎬',
         image: '/youtube-script-writer.jpg',
         instruction: `Create engaging YouTube scripts.`,
@@ -57,7 +57,7 @@ export default [
     },
     {
         id: 5,
-        name: 'Harry',
+        name: 'Abhishek',
         title: 'Code Writer 💻',
         image: '/code-writer.jpg',
         instruction: `Write and assist with coding tasks.`,
@@ -71,7 +71,7 @@ export default [
     },
     {
         id: 6,
-        name: 'James',
+        name: 'Mike',
         title: 'Bug Finder 🐛',
         image: '/bug-fixer.avif',
         instruction: `Identify and fix issues in code.`,
@@ -85,7 +85,7 @@ export default [
     },
     {
         id: 7,
-        name: 'William',
+        name: 'Nitish',
         title: 'Finance Assistant 💰',
         image: '/finanace.avif',
         instruction: `Provide financial advice and tips.`,
@@ -99,7 +99,7 @@ export default [
     },
     {
         id: 8,
-        name: 'Ava',
+        name: 'Donna',
         title: 'Virtual Girlfriend 💖',
         image: '/virtual-girl.jpg',
         instruction: `Engage in friendly and romantic chats.`,
