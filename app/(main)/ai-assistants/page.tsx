@@ -105,7 +105,7 @@ function AiAssistants() {
 
 
   return (
-    <div className = 'px-10 mt-20 md:px-28 lg:px-36 xl:px-48' >
+    <div className = 'px-10 mt-15 md:px-28 lg:px-36 xl:px-48'>
       <div className = 'flex justify-between items-center'>
         <div>
           <BlurFade delay = {0.15} inView>

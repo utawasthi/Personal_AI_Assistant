@@ -11,7 +11,6 @@ import {
 import { AuthContext } from "@/context/AuthContext"
 import { googleLogout } from "@react-oauth/google";
 import { LogOut, UserCircle2 } from "lucide-react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react"
 import Profile from "../workspace/_components/Profile";
@@ -48,7 +47,7 @@ function UserAccount({
         {user && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="dark:bg-gray-800 p-2 rounded-lg cursor-pointer">
+              <div className="p-2 rounded-lg cursor-pointer">
                 {children}
               </div>
             </DropdownMenuTrigger>
