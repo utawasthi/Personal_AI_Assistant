@@ -20,12 +20,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { LogOut, UserCircle2 } from 'lucide-react';
 import Profile from './Profile';
 import { googleLogout } from '@react-oauth/google';
 import { useRouter } from 'next/navigation';
 import SearchAssistant from './SearchAssistant';
 import CreateNewAssistant from './CreateNewAssistant';
+import { TooltipProvider } from '@radix-ui/react-tooltip';
 
 function AssistantsList() {
 
@@ -67,11 +73,36 @@ function AssistantsList() {
           className = 'object-cover h-[50px] w-[50px]'
         />
 
-        <CreateNewAssistant>
-          <Button className="w-full mt-3 text-sm font-medium cursor-pointer dark:bg-cyan-950 dark:text-white/95">
-            + Create Your Own
-          </Button>
-        </CreateNewAssistant>
+        <div>
+          { user?.orderId ? (
+              <CreateNewAssistant>
+                <Button 
+                  className="w-full mt-3 text-sm font-medium dark:bg-cyan-950 dark:text-white/95 cursor-pointer"
+                  disabled = {!user?.orderId}
+                >
+                  + Create Your Own
+                </Button>
+              </CreateNewAssistant>
+            ) : (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div>
+                      <Button 
+                        disabled 
+                        className = "w-full mt-3 text-sm font-medium dark:bg-cyan-950 dark:text-white/95 cursor-no-drop"
+                      >
+                        + Create Your Own
+                      </Button>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Upgrade to Pro to unlock this feature</p>
+                  </TooltipContent>
+                </Tooltip>
+            )
+          }
+        </div>
+
 
         <AddNewAssistant>
           <Button className="w-full mt-3 text-sm font-medium cursor-pointer dark:bg-cyan-950 dark:text-white/95">

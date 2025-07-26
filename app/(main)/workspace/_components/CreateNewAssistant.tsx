@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from "@/components/ui/input"
-import AiAssistantsList from "@/services/AiAssistantsList"
 import Image from "next/image"
 import { useContext, useState } from "react"
 import { AssistantType } from "../../ai-assistants/page"
@@ -27,7 +26,7 @@ import { Loader2Icon } from "lucide-react";
 
 
 const Default_Assistant = {
-  image : '/bug-fixer.avif',
+  image : '/assistM2.jpg',
   name : '',
   title : '',
   instruction : '',
@@ -72,7 +71,11 @@ function CreateNewAssistant({children} : any) {
         records : [newAssistant] ,
         uid : user?._id as Id<"users">,
       });
-      toast("New Assistant Added !!");
+      const inserted = result.find(r => r.status === "inserted");
+      const skipped = result.find(r => r.status === "skipped");
+
+      if(inserted) toast.success(`${inserted.title} added successfully!`);
+      if(skipped) toast.warning(`${skipped.title} already exists`);
       setAssistant(null);
     }
     catch(err : any){
@@ -89,7 +92,7 @@ function CreateNewAssistant({children} : any) {
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className = 'p-4'> Explore Orbit Mind Assistants </DialogTitle>
+            <DialogTitle className = 'p-4'> Create your own Orbit Mind </DialogTitle>
             <DialogDescription asChild>
                 <div className = 'p-4'>
                   <div className = 'flex items-center gap-3'>
